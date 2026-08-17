@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Day 3 Close Read — Achieved or Blocked?</title>
+<style>
+  :root {
+    --ink: #2a2a2a; --paper: #faf8f3; --accent: #6b5b3e; --gold: #b08d57;
+    --green: #cfead0; --green-strong: #4a8f52; --red: #f3d2ce; --red-strong: #b8493d; --panel: #f4f0e8;
+    --navy: #2c3e5c;
+  }
+  * { box-sizing: border-box; }
+  body { font-family: Georgia, 'Times New Roman', serif; max-width: 900px; margin: 0 auto; padding: 20px; line-height: 1.6; color: var(--ink); background: #fff; }
+  h1 { font-family: Arial, sans-serif; font-size: 1.5rem; margin-bottom: 4px; }
+  h2 { font-family: Arial, sans-serif; font-size: 1.15rem; margin-top: 2.2em; border-bottom: 2px solid var(--gold); padding-bottom: 4px; }
+  h3 { font-family: Arial, sans-serif; font-size: 1rem; margin: 1em 0 4px 0; }
+  .subtitle { color: #555; font-family: Arial, sans-serif; font-size: 0.95rem; margin-bottom: 1.2em; }
+  .rubric-note { background: var(--panel); border-left: 4px solid var(--accent); padding: 12px 16px; font-family: Arial, sans-serif; font-size: 0.88rem; }
+  .context-strip { background: #eef1fb; border-left: 4px solid var(--navy); padding: 12px 16px; font-family: Arial, sans-serif; font-size: 0.9rem; margin: 14px 0; }
+  .id-bar { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; background: var(--panel); padding: 12px 16px; margin: 16px 0; border-radius: 4px; }
+  .id-bar input { padding: 6px 8px; font-size: 14px; font-family: Arial, sans-serif; }
+  button { font-family: Arial, sans-serif; padding: 8px 14px; font-size: 13.5px; cursor: pointer; border: 1px solid var(--accent); background: #fff; color: var(--accent); border-radius: 4px; margin: 4px 6px 4px 0; }
+  button:hover { background: var(--accent); color: #fff; }
+  button.primary { background: var(--accent); color: #fff; }
+  button:disabled { opacity: 0.4; cursor: not-allowed; }
+  .highlight-btn.green { border-color: var(--green-strong); color: var(--green-strong); }
+  .highlight-btn.green:hover { background: var(--green-strong); color: #fff; }
+  .highlight-btn.red { border-color: var(--red-strong); color: var(--red-strong); }
+  .highlight-btn.red:hover { background: var(--red-strong); color: #fff; }
+
+  .source-text { background: var(--paper); padding: 14px 18px; border-left: 4px solid var(--gold); margin: 10px 0; font-size: 1.02rem; }
+  .source-text mark { background: transparent; }
+  .doc-meta { font-family: Arial, sans-serif; font-size: 0.85rem; color: #555; margin-bottom: 6px; }
+  .clause-label { font-family: Arial, sans-serif; font-weight: bold; font-size: 0.85rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.03em; }
+
+  .guided-block { background: #fff; border: 1px solid #ddd; border-radius: 6px; padding: 14px 16px; margin: 8px 0 20px 0; }
+  .guided-question { font-family: Arial, sans-serif; font-size: 0.95rem; margin-bottom: 10px; }
+
+  .big-three-row { display: flex; gap: 16px; flex-wrap: wrap; font-family: Arial, sans-serif; font-size: 0.88rem; margin-bottom: 10px; }
+  .big-three-field { display: flex; flex-direction: column; gap: 4px; }
+  .big-three-field label { font-weight: bold; color: var(--accent); font-size: 0.82rem; }
+  .big-three-field select { padding: 6px 8px; font-family: inherit; font-size: 13.5px; border: 1px solid #ccc; border-radius: 4px; }
+
+  .notes-box, textarea { width: 100%; min-height: 70px; font-family: inherit; font-size: 14.5px; padding: 10px; border: 1px solid #ccc; border-radius: 4px; }
+  textarea.big { min-height: 160px; }
+  textarea.small { min-height: 55px; }
+
+  .helper-panel { background: var(--panel); border-left: 4px solid var(--accent); padding: 12px 16px; margin-top: 8px; white-space: pre-wrap; font-family: Arial, sans-serif; font-size: 0.92rem; }
+  .locked { color: #999; font-style: italic; }
+
+  .legend { display: flex; gap: 14px; flex-wrap: wrap; font-family: Arial, sans-serif; font-size: 0.85rem; margin: 10px 0; }
+  .legend .swatch { display: inline-block; width: 14px; height: 14px; border-radius: 3px; margin-right: 5px; vertical-align: middle; }
+
+  .vocab-checklist { display: flex; gap: 8px; flex-wrap: wrap; font-family: Arial, sans-serif; font-size: 0.85rem; margin: 8px 0; }
+  .vocab-chip { padding: 4px 10px; border-radius: 12px; border: 1px solid #ccc; background: #eee; color: #777; cursor: pointer; }
+  .vocab-chip:hover { border-color: var(--accent); }
+  .vocab-chip.used { background: var(--green); border-color: var(--green-strong); color: #245c29; font-weight: bold; }
+  .vocab-definition { display: none; font-family: Arial, sans-serif; font-size: 0.85rem; background: var(--panel); padding: 8px 12px; border-radius: 4px; margin-top: 6px; }
+  .vocab-definition.show { display: block; }
+  .vocab-status { font-family: Arial, sans-serif; font-size: 0.85rem; margin-top: 4px; }
+
+  .try-first-note { font-family: Arial, sans-serif; font-size: 0.78rem; color: #888; margin: 4px 0; }
+  .paste-warning { color: #a33; font-size: 12.5px; margin-top: 4px; font-family: Arial, sans-serif; }
+  .save-indicator { font-family: Arial, sans-serif; font-size: 0.8rem; color: #888; margin-top: 4px; }
+
+  .claim-card { background: #fdf6ea; border: 2px solid var(--gold); border-radius: 6px; padding: 16px 18px; margin: 12px 0; font-family: Arial, sans-serif; }
+  .claim-card .claim-text { font-family: Georgia, serif; font-size: 1.1rem; font-weight: bold; color: var(--navy); margin: 8px 0; }
+
+  .completion-box { margin-top: 14px; padding: 14px 18px; border-radius: 4px; font-family: Arial, sans-serif; }
+  .completion-box.pass { background: #e4f4e6; border-left: 4px solid var(--green-strong); }
+  .completion-box.incomplete { background: #fdf1e4; border-left: 4px solid #c98a2c; }
+  .completion-box ul { margin: 6px 0 0 0; padding-left: 18px; font-size: 0.85rem; }
+
+  .mock-banner { background: #eef1fb; border-left: 4px solid #4a5fa8; padding: 10px 16px; font-family: Arial, sans-serif; font-size: 0.85rem; margin: 16px 0 10px 0; }
+  .mock-cards { display: flex; gap: 14px; flex-wrap: wrap; }
+  .mock-card { flex: 1; min-width: 260px; background: #fff; border: 1px solid #ddd; border-radius: 6px; padding: 14px 16px; font-family: Arial, sans-serif; }
+  .mock-card h4 { margin: 0 0 4px 0; font-size: 0.95rem; }
+  .mock-card .range { font-weight: bold; color: #4a5fa8; margin-bottom: 6px; }
+  .mock-card .improve { margin-top: 8px; padding-top: 8px; border-top: 1px dashed #ccc; font-size: 0.85rem; }
+
+  @media print {
+    button, .id-bar { display: none !important; }
+    body.printing > *:not(#print-summary) { display: none !important; }
+    #print-summary { display: block !important; }
+  }
+  #print-summary { display: none; font-family: Georgia, serif; }
+  #print-summary h2 { border-bottom: 1px solid #999; margin-top: 1.4em; }
+  #print-summary .p-block { white-space: pre-wrap; margin: 6px 0 14px 0; }
+  #print-summary .p-doc { background: var(--paper); padding: 10px 14px; border-left: 3px solid var(--gold); margin: 8px 0; }
+  #print-summary .p-label { font-family: Arial, sans-serif; font-weight: bold; font-size: 0.85rem; color: var(--accent); margin-top: 10px; }
+</style>
+</head>
+<body>
+
+<h1>Day 3 Close Read: Achieved or Blocked?</h1>
+<div class="subtitle">Unit 1: Reconstruction &amp; the Rise of Jim Crow — SQ1 Research &amp; Evaluate</div>
+
+<div class="rubric-note">
+  <strong>What this feeds into:</strong> Today's work is a <strong>completion grade</strong> — did you do the
+  thinking, not a number score. It's practice for two criteria on the APS Writing Rubric you'll be scored on
+  later this unit: <strong>Use of Evidence</strong> and <strong>Analysis and Reasoning</strong>. At the end
+  you'll get a labeled <em>practice preview</em> of how your work would score on those two criteria — that's
+  feedback to help you improve, not your grade for today. <strong>Your annotations here are also your
+  ammunition for today's fishbowl discussion</strong> — the more specific your evidence, the stronger your
+  voice in the circle.
+</div>
+
+<div class="id-bar">
+  <label for="student-id">Your Name:</label>
+  <input id="student-id" type="text" placeholder="e.g. Jamie Smith">
+  <button onclick="loadState()">Load my saved work</button>
+  <span id="load-status" class="save-indicator"></span>
+</div>
+<div class="try-first-note" style="margin-top:-8px;">Use your first and last name, spelled the same way every time — this is how your work is found and saved.</div>
+
+<!-- ============ CONTEXT STRIP: HOOK RECAP ============ -->
+<div class="context-strip">
+  <strong>Today's hook, in one line:</strong> The Freedmen's Bureau built roughly 4,000 schools by the late
+  1860s (Social success) — but most confiscated land was returned to pardoned former Confederates under
+  President Johnson (Political/Economic setback). Same institution, same years, opposite outcomes depending
+  on which lens you use. Today's two documents show that same split playing out in real arguments.
+</div>
+
+<!-- ============ ANNOTATION GUIDE / LEGEND ============ -->
+<h2>The Big Three: how to annotate today</h2>
+<p style="font-family:Arial, sans-serif; font-size:0.9rem;">For every passage below, you'll do three things: mark it <strong>Achieved</strong> or
+  <strong>Blocked</strong> (for formerly enslaved people's goals), tag which <strong>lens</strong> fits best, and highlight your
+  evidence in the text.</p>
+<div class="legend">
+  <span><span class="swatch" style="background:var(--green-strong);"></span>Green highlight = evidence of something ACHIEVED</span>
+  <span><span class="swatch" style="background:var(--red-strong);"></span>Red highlight = evidence of something BLOCKED</span>
+</div>
+
+<!-- ============ DOCUMENT 1: COLORED CONVENTION ADDRESS ============ -->
+<h2>Document 1: Address of the Colored State Convention to the People of South Carolina</h2>
+<div class="doc-meta">Charleston, South Carolina — November 24, 1865. Delegates of formerly enslaved and free Black South Carolinians, gathered five months after the war's end, speaking directly to the state's white citizens.</div>
+<p style="font-family:Arial, sans-serif; font-size:0.88rem;">Select text, then click a color to highlight your evidence.</p>
+<button class="highlight-btn green" onclick="applyHighlight('green')">Highlight: Achieved</button>
+<button class="highlight-btn red" onclick="applyHighlight('red')">Highlight: Blocked</button>
+<button onclick="applyHighlight(null)">Clear highlight</button>
+
+<div class="clause-label">Passage 1 — Who is speaking, and why</div>
+<div class="source-text" id="chunk-cv1" contenteditable="true" spellcheck="false">We have assembled as delegates representing the colored people of the State of South Carolina, in the capacity of State Convention, to confer together and to deliberate upon our intellectual, moral, industrial, civil, and political condition as affected by the great changes which have taken place in this State.</div>
+<div class="guided-block">
+  <div class="guided-question"><strong>Guiding question:</strong> What change gives these delegates the standing to speak this way, in public, to the whole state? What does the act of holding this convention itself tell you — achieved or still in progress?</div>
+  <div class="big-three-row">
+    <div class="big-three-field">
+      <label for="tag-cv1">Achieved or Blocked?</label>
+      <select id="tag-cv1"><option value="">-- choose --</option><option value="achieved">Achieved</option><option value="blocked">Blocked</option></select>
+    </div>
+    <div class="big-three-field">
+      <label for="lens-cv1">Lens</label>
+      <select id="lens-cv1"><option value="">-- choose --</option><option value="political">Political</option><option value="economic">Economic</option><option value="social">Social/Cultural</option></select>
+    </div>
+  </div>
+  <textarea class="small" id="answer-cv1" placeholder="Your explanation, using the text..."></textarea>
+  <div class="try-first-note">Write your own answer first — the check button unlocks after a few sentences.</div>
+  <button id="checkbtn-cv1" onclick="checkGuided('cv1','Convention Address — Passage 1','chunk-cv1','What does holding this convention itself tell you — achieved or still in progress? Which lens fits?')">Check my understanding</button>
+  <div class="helper-panel" id="feedback-cv1" style="display:none;"></div>
+</div>
+
+<div class="clause-label">Passage 2 — What they're asking for</div>
+<div class="source-text" id="chunk-cv2" contenteditable="true" spellcheck="false">We ask for no special privileges, or peculiar favors. We ask only for even-handed justice — for the removal of such positive obstructions and disabilities as past and recent legislation has thrown in our way and heaped upon us.</div>
+<div class="guided-block">
+  <div class="guided-question"><strong>Guiding question:</strong> The delegates are careful to say they want "even-handed justice," not "special privileges." Why might that distinction have mattered to their audience? Is the goal here achieved or blocked, and what lens fits?</div>
+  <div class="big-three-row">
+    <div class="big-three-field">
+      <label for="tag-cv2">Achieved or Blocked?</label>
+      <select id="tag-cv2"><option value="">-- choose --</option><option value="achieved">Achieved</option><option value="blocked">Blocked</option></select>
+    </div>
+    <div class="big-three-field">
+      <label for="lens-cv2">Lens</label>
+      <select id="lens-cv2"><option value="">-- choose --</option><option value="political">Political</option><option value="economic">Economic</option><option value="social">Social/Cultural</option></select>
+    </div>
+  </div>
+  <textarea class="small" id="answer-cv2" placeholder="Your explanation, using the text..."></textarea>
+  <div class="try-first-note">Write your own answer first — the check button unlocks after a few sentences.</div>
+  <button id="checkbtn-cv2" onclick="checkGuided('cv2','Convention Address — Passage 2','chunk-cv2','Why distinguish justice from special privileges? Achieved or blocked, and which lens?')">Check my understanding</button>
+  <div class="helper-panel" id="feedback-cv2" style="display:none;"></div>
+</div>
+
+<div class="clause-label">Passage 3 — What's still blocked</div>
+<div class="source-text" id="chunk-cv3" contenteditable="true" spellcheck="false">We... have, with few exceptions, been virtually excluded from the rights of citizenship, which you cheerfully accord to strangers, notwithstanding we have been born and reared in your midst. We are denied the right of giving our testimony in the courts of the State, in consequence of which our persons and property are subject to every species of violence and insult, and fraud and spoliation, without redress.</div>
+<div class="guided-block">
+  <div class="guided-question"><strong>Guiding question:</strong> Name one specific right this passage says is denied. What real, everyday consequence does that denial have, according to the text? Mark it and tag the lens.</div>
+  <div class="big-three-row">
+    <div class="big-three-field">
+      <label for="tag-cv3">Achieved or Blocked?</label>
+      <select id="tag-cv3"><option value="">-- choose --</option><option value="achieved">Achieved</option><option value="blocked">Blocked</option></select>
+    </div>
+    <div class="big-three-field">
+      <label for="lens-cv3">Lens</label>
+      <select id="lens-cv3"><option value="">-- choose --</option><option value="political">Political</option><option value="economic">Economic</option><option value="social">Social/Cultural</option></select>
+    </div>
+  </div>
+  <textarea class="small" id="answer-cv3" placeholder="Your explanation, using the text..."></textarea>
+  <div class="try-first-note">Write your own answer first — the check button unlocks after a few sentences.</div>
+  <button id="checkbtn-cv3" onclick="checkGuided('cv3','Convention Address — Passage 3','chunk-cv3','Which specific right is denied, and what real consequence does that have?')">Check my understanding</button>
+  <div class="helper-panel" id="feedback-cv3" style="display:none;"></div>
+</div>
+
+<div>
+  <label for="question-cv" style="font-family:Arial, sans-serif; font-size:0.88rem;">Still stuck on something else in this document? Ask here:</label>
+  <input type="text" id="question-cv" style="width:100%; padding:8px; margin:6px 0; font-family:inherit;" placeholder="e.g. what does 'spoliation' mean?">
+  <button id="ask-cv-btn" onclick="askHelp('cv')">Ask for open-ended help</button>
+</div>
+<div class="helper-panel" id="helper-cv" style="display:none;"></div>
+
+<h3>Other notes on this document (optional, just for you)</h3>
+<textarea class="notes-box" id="other-notes-cv" placeholder="Anything else you want to jot down..."></textarea>
+
+<!-- ============ DOCUMENT 2: JOHNSON VETO ============ -->
+<h2>Document 2: President Andrew Johnson's Veto of the Freedmen's Bureau Bill</h2>
+<div class="doc-meta">Washington, D.C. — February 19, 1866. Johnson's message returning to Congress a bill that would have extended and strengthened the Freedmen's Bureau.</div>
+<p style="font-family:Arial, sans-serif; font-size:0.88rem;">Highlight the same way as above.</p>
+<button class="highlight-btn green" onclick="applyHighlight('green')">Highlight: Achieved</button>
+<button class="highlight-btn red" onclick="applyHighlight('red')">Highlight: Blocked</button>
+<button onclick="applyHighlight(null)">Clear highlight</button>
+
+<div class="clause-label">Passage 1 — No necessity claim</div>
+<div class="source-text" id="chunk-jv1" contenteditable="true" spellcheck="false">There is no immediate necessity for the proposed measure. The act to establish a bureau for the relief of freedmen and refugees, which was approved in the month of March last, has not yet expired. It was thought stringent and extensive enough for the purpose in view in time of war.</div>
+<div class="guided-block">
+  <div class="guided-question"><strong>Guiding question:</strong> Johnson says a stronger Bureau bill isn't necessary. Whose interests does this argument serve? From the perspective of formerly enslaved people, is this passage evidence of something achieved or something blocked? Tag the lens.</div>
+  <div class="big-three-row">
+    <div class="big-three-field">
+      <label for="tag-jv1">Achieved or Blocked?</label>
+      <select id="tag-jv1"><option value="">-- choose --</option><option value="achieved">Achieved</option><option value="blocked">Blocked</option></select>
+    </div>
+    <div class="big-three-field">
+      <label for="lens-jv1">Lens</label>
+      <select id="lens-jv1"><option value="">-- choose --</option><option value="political">Political</option><option value="economic">Economic</option><option value="social">Social/Cultural</option></select>
+    </div>
+  </div>
+  <textarea class="small" id="answer-jv1" placeholder="Your explanation, using the text..."></textarea>
+  <div class="try-first-note">Write your own answer first — the check button unlocks after a few sentences.</div>
+  <button id="checkbtn-jv1" onclick="checkGuided('jv1','Johnson Veto — Passage 1','chunk-jv1','Whose interests does the no-necessity claim serve? Achieved or blocked for freedpeople, and which lens?')">Check my understanding</button>
+  <div class="helper-panel" id="feedback-jv1" style="display:none;"></div>
+</div>
+
+<div class="clause-label">Passage 2 — Cost and scale objection</div>
+<div class="source-text" id="chunk-jv2" contenteditable="true" spellcheck="false">The appointment of an agent for every county and parish will create an immense patronage; and the expense of the numerous officers and their clerks, to be appointed by the President, will be great in the beginning, with a tendency steadily to increase.</div>
+<div class="guided-block">
+  <div class="guided-question"><strong>Guiding question:</strong> What specific goal does this objection block, and for whom? Would a formerly enslaved person reading this in 1866 see it as a fair, neutral concern — or something else? Explain, and tag it.</div>
+  <div class="big-three-row">
+    <div class="big-three-field">
+      <label for="tag-jv2">Achieved or Blocked?</label>
+      <select id="tag-jv2"><option value="">-- choose --</option><option value="achieved">Achieved</option><option value="blocked">Blocked</option></select>
+    </div>
+    <div class="big-three-field">
+      <label for="lens-jv2">Lens</label>
+      <select id="lens-jv2"><option value="">-- choose --</option><option value="political">Political</option><option value="economic">Economic</option><option value="social">Social/Cultural</option></select>
+    </div>
+  </div>
+  <textarea class="small" id="answer-jv2" placeholder="Your explanation, using the text..."></textarea>
+  <div class="try-first-note">Write your own answer first — the check button unlocks after a few sentences.</div>
+  <button id="checkbtn-jv2" onclick="checkGuided('jv2','Johnson Veto — Passage 2','chunk-jv2','What goal does the cost objection block, and for whom?')">Check my understanding</button>
+  <div class="helper-panel" id="feedback-jv2" style="display:none;"></div>
+</div>
+
+<div class="clause-label">Passage 3 — Trust in the state courts</div>
+<div class="source-text" id="chunk-jv3" contenteditable="true" spellcheck="false">With the Federal courts restored and those of the several States in the full exercise of their functions, the rights and interests of all classes of people will, with the aid of the military in cases of resistance to the laws, be essentially protected against unconstitutional infringement or violation.</div>
+<div class="guided-block">
+  <div class="guided-question"><strong>Guiding question:</strong> Johnson claims the state courts, once "restored," will protect everyone's rights. Compare this directly to Document 1, Passage 3 — what did the Convention delegates say about those same state courts? Mark this passage and tag the lens.</div>
+  <div class="big-three-row">
+    <div class="big-three-field">
+      <label for="tag-jv3">Achieved or Blocked?</label>
+      <select id="tag-jv3"><option value="">-- choose --</option><option value="achieved">Achieved</option><option value="blocked">Blocked</option></select>
+    </div>
+    <div class="big-three-field">
+      <label for="lens-jv3">Lens</label>
+      <select id="lens-jv3"><option value="">-- choose --</option><option value="political">Political</option><option value="economic">Economic</option><option value="social">Social/Cultural</option></select>
+    </div>
+  </div>
+  <textarea class="small" id="answer-jv3" placeholder="Your explanation — try to reference Document 1 here too..."></textarea>
+  <div class="try-first-note">Write your own answer first — the check button unlocks after a few sentences.</div>
+  <button id="checkbtn-jv3" onclick="checkGuided('jv3','Johnson Veto — Passage 3','chunk-jv3','How does this claim about restored courts compare to what Document 1 said about the same courts?')">Check my understanding</button>
+  <div class="helper-panel" id="feedback-jv3" style="display:none;"></div>
+</div>
+
+<div>
+  <label for="question-jv" style="font-family:Arial, sans-serif; font-size:0.88rem;">Still stuck on something else in this document? Ask here:</label>
+  <input type="text" id="question-jv" style="width:100%; padding:8px; margin:6px 0; font-family:inherit;" placeholder="e.g. what does 'patronage' mean?">
+  <button id="ask-jv-btn" onclick="askHelp('jv')">Ask for open-ended help</button>
+</div>
+<div class="helper-panel" id="helper-jv" style="display:none;"></div>
+
+<h3>Other notes on this document (optional, just for you)</h3>
+<textarea class="notes-box" id="other-notes-jv" placeholder="Anything else you want to jot down..."></textarea>
+
+<!-- ============ FISHBOWL PREP / SYNTHESIS ============ -->
+<h2>Fishbowl Prep: Which document wins the argument?</h2>
+<div class="claim-card">
+  <div style="font-family:Arial, sans-serif; font-size:0.82rem; font-weight:bold; color:var(--accent); text-transform:uppercase;">Today's contested claim</div>
+  <div class="claim-text">"The state courts can be trusted to protect the rights of formerly enslaved people once federal oversight ends."</div>
+  <div style="font-family:Arial, sans-serif; font-size:0.85rem; color:#555;">Document 1 (Convention Address) argues <strong>no</strong>. Document 2 (Johnson's veto) argues <strong>yes</strong>.</div>
+</div>
+<p style="font-family:Arial, sans-serif; font-size:0.9rem; color:#555;">
+  Pick a side using real evidence. Quote directly from at least one document. This is what you'll say (or push
+  back on) when you're in the fishbowl circle.
+</p>
+
+<h3>Vocabulary — click a word for its definition. Use at least half of these in your writing below.</h3>
+<div class="vocab-checklist" id="vocab-checklist"></div>
+<div class="vocab-definition" id="vocab-definition"></div>
+<div class="vocab-status" id="vocab-status"></div>
+
+<textarea class="big" id="fishbowl-prep" placeholder="Type your position here — pasting is disabled for this assignment."></textarea>
+<div class="paste-warning" id="paste-warning" style="display:none;">Pasting is disabled for this assignment — type your own response.</div>
+<div class="try-first-note">Write your own position first — the check button unlocks once you've written a few sentences.</div>
+<button id="checkbtn-fishbowl" onclick="checkFishbowlPrep()">Check my reasoning so far (coaching, not a grade)</button>
+<div class="helper-panel" id="feedback-fishbowl" style="display:none;"></div>
+
+<!-- ============ SUBMIT ============ -->
+<div style="margin-top:20px;">
+  <button class="primary" onclick="submitWork()">Submit for feedback</button>
+  <button onclick="downloadWork()">Download my work (PDF-style print)</button>
+</div>
+<p style="font-family:Arial, sans-serif; font-size:0.85rem; color:#555; max-width:600px;">
+  <strong>Before the fishbowl starts:</strong> Click <strong>Submit for feedback</strong> first, then click
+  <strong>Download my work</strong> and save it as a PDF (choose "Save as PDF" as the printer). Bring your
+  printed or saved notes into the fishbowl — you'll want them in front of you.
+</p>
+<div id="completion-area"></div>
+
+<div id="print-summary"></div>
+
+<script>
+// ============ CONFIG — must match Code.gs ============
+const APPS_SCRIPT_URL = 'PASTE_YOUR_DAY_3_WEB_APP_URL_HERE';
+const SHARED_SECRET = 'V4cgEurJBSlvvD3L2Pb04UbfWzJdlEq';
+// =======================================================
+
+const VOCAB_LIST = [
+  { term: 'evaluate', label: 'Evaluate', definition: 'To judge how well something worked.' },
+  { term: 'evidence', label: 'Evidence', definition: 'Specific facts or text used to support a claim.' },
+  { term: 'analysis', label: 'Analysis', definition: 'Explaining what evidence means and why it matters.' },
+  { term: '14th amendment', label: '14th Amendment', definition: 'A constitutional amendment (ratified 1868) guaranteeing citizenship and equal protection.' },
+  { term: 'freedmen\u2019s bureau', label: 'Freedmen\u2019s Bureau', definition: 'A federal agency (1865\u20131872) set up to assist formerly enslaved people.' },
+  { term: 'sharecropping', label: 'Sharecropping', definition: 'A farming system where a tenant farms land for a share of the crop, often trapping workers in debt.' }
+];
+const VOCAB_REQUIRED = Math.ceil(VOCAB_LIST.length * 0.5); // 3 of 6
+const GUIDED_KEYS = ['cv1', 'cv2', 'cv3', 'jv1', 'jv2', 'jv3', 'fishbowl'];
+const MAX_CHECK_ATTEMPTS = 3;
+
+let struggleLevels = { 'cv': 0, 'jv': 0 };
+let guidedAttempts = {};
+
+// ---------- Vocabulary checklist ----------
+function renderVocabChecklist(usedTerms) {
+  const container = document.getElementById('vocab-checklist');
+  container.innerHTML = '';
+  VOCAB_LIST.forEach(v => {
+    const chip = document.createElement('span');
+    chip.className = 'vocab-chip' + (usedTerms.includes(v.term) ? ' used' : '');
+    chip.textContent = v.label;
+    chip.setAttribute('role', 'button');
+    chip.setAttribute('tabindex', '0');
+    chip.onclick = () => showDefinition(v.term);
+    chip.onkeypress = (e) => { if (e.key === 'Enter' || e.key === ' ') showDefinition(v.term); };
+    container.appendChild(chip);
+  });
+  document.getElementById('vocab-status').textContent =
+    usedTerms.length + ' of ' + VOCAB_REQUIRED + ' required vocabulary words used.';
+}
+
+function showDefinition(term) {
+  const box = document.getElementById('vocab-definition');
+  const entry = VOCAB_LIST.find(v => v.term === term);
+  if (!entry) return;
+  if (box.classList.contains('show') && box.dataset.term === term) {
+    box.classList.remove('show');
+    box.dataset.term = '';
+    return;
+  }
+  box.innerHTML = '<strong>' + entry.label + ':</strong> ' + entry.definition;
+  box.dataset.term = term;
+  box.classList.add('show');
+}
+
+function getUsedVocab() {
+  const text = document.getElementById('fishbowl-prep').value.toLowerCase();
+  return VOCAB_LIST.filter(v => text.includes(v.term)).map(v => v.term);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderVocabChecklist([]);
+  document.getElementById('fishbowl-prep').addEventListener('input', () => {
+    renderVocabChecklist(getUsedVocab());
+  });
+});
+
+// ---------- "Try first" enforcement — check/ask buttons unlock after a genuine attempt ----------
+function wireTryFirst(inputId, buttonId, minChars) {
+  const input = document.getElementById(inputId);
+  const btn = document.getElementById(buttonId);
+  if (!input || !btn) return;
+  const update = () => { btn.disabled = input.value.trim().length < minChars; };
+  update();
+  input.addEventListener('input', update);
+}
+document.addEventListener('DOMContentLoaded', () => {
+  wireTryFirst('answer-cv1', 'checkbtn-cv1', 15);
+  wireTryFirst('answer-cv2', 'checkbtn-cv2', 15);
+  wireTryFirst('answer-cv3', 'checkbtn-cv3', 15);
+  wireTryFirst('answer-jv1', 'checkbtn-jv1', 15);
+  wireTryFirst('answer-jv2', 'checkbtn-jv2', 15);
+  wireTryFirst('answer-jv3', 'checkbtn-jv3', 15);
+  wireTryFirst('fishbowl-prep', 'checkbtn-fishbowl', 40);
+  wireTryFirst('question-cv', 'ask-cv-btn', 8);
+  wireTryFirst('question-jv', 'ask-jv-btn', 8);
+});
+
+// ---------- Paste blocking on all free-write boxes ----------
+['fishbowl-prep', 'other-notes-cv', 'other-notes-jv',
+ 'answer-cv1', 'answer-cv2', 'answer-cv3', 'answer-jv1', 'answer-jv2', 'answer-jv3'].forEach(id => {
+  document.addEventListener('DOMContentLoaded', () => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('paste', function (e) {
+      e.preventDefault();
+      const warn = document.getElementById('paste-warning');
+      if (warn) { warn.style.display = 'block'; setTimeout(() => { warn.style.display = 'none'; }, 2500); }
+    });
+    el.addEventListener('contextmenu', e => e.preventDefault());
+  });
+});
+
+// ---------- Highlighting (contenteditable, typing blocked, formatting allowed) ----------
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.source-text[contenteditable="true"]').forEach(el => {
+    el.addEventListener('beforeinput', function (e) {
+      if (e.inputType && (e.inputType.startsWith('insert') || e.inputType.startsWith('delete'))) {
+        e.preventDefault();
+      }
+    });
+    el.addEventListener('paste', e => e.preventDefault());
+  });
+});
+
+function applyHighlight(color) {
+  const sel = window.getSelection();
+  if (!sel || sel.rangeCount === 0 || sel.toString().trim() === '') {
+    alert('Select some text in one of the documents first.');
+    return;
+  }
+  const anchorNode = sel.anchorNode;
+  const container = anchorNode && anchorNode.nodeType === 3 ? anchorNode.parentElement : anchorNode;
+  const validParent = container && container.closest('.source-text[contenteditable="true"]');
+  if (!validParent) { alert('Select text inside one of the documents above.'); return; }
+
+  if (color === null) {
+    document.execCommand('hiliteColor', false, 'transparent');
+  } else {
+    const cssColor = color === 'green' ? '#cfead0' : '#f3d2ce';
+    document.execCommand('hiliteColor', false, cssColor);
+  }
+  scheduleAutoSave();
+}
+
+function countHighlights() {
+  let total = 0;
+  document.querySelectorAll('.source-text[contenteditable="true"]').forEach(el => {
+    total += (el.innerHTML.match(/background-color/g) || []).length;
+  });
+  return total;
+}
+
+function collectHighlights() {
+  const map = {};
+  document.querySelectorAll('.source-text[contenteditable="true"]').forEach(el => { map[el.id] = el.innerHTML; });
+  return map;
+}
+
+function restoreHighlights(map) {
+  if (!map) return;
+  Object.keys(map).forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = map[id];
+  });
+}
+
+// ---------- Big Three tag/lens selects ----------
+const TAG_KEYS = ['cv1', 'cv2', 'cv3', 'jv1', 'jv2', 'jv3'];
+function collectTags() {
+  const map = {};
+  TAG_KEYS.forEach(k => {
+    const tagEl = document.getElementById('tag-' + k);
+    const lensEl = document.getElementById('lens-' + k);
+    map[k] = { tag: tagEl ? tagEl.value : '', lens: lensEl ? lensEl.value : '' };
+  });
+  return map;
+}
+function restoreTags(map) {
+  if (!map) return;
+  TAG_KEYS.forEach(k => {
+    const entry = map[k];
+    if (!entry) return;
+    const tagEl = document.getElementById('tag-' + k);
+    const lensEl = document.getElementById('lens-' + k);
+    if (tagEl && entry.tag) tagEl.value = entry.tag;
+    if (lensEl && entry.lens) lensEl.value = entry.lens;
+  });
+}
+document.addEventListener('DOMContentLoaded', () => {
+  TAG_KEYS.forEach(k => {
+    const tagEl = document.getElementById('tag-' + k);
+    const lensEl = document.getElementById('lens-' + k);
+    if (tagEl) tagEl.addEventListener('change', scheduleAutoSave);
+    if (lensEl) lensEl.addEventListener('change', scheduleAutoSave);
+  });
+});
+
+// ---------- Backend calls ----------
+// Retry-with-backoff pattern (BUILD-REFERENCE.md, "Key design decisions"): Apps Script has a cap
+// on simultaneous executions. Under a full class load, a bounced request returns an HTML error
+// page instead of JSON. That's a *retryable* condition, not an instant failure -- so we fetch as
+// text first, try to parse it, and only treat it as a real failure once retries are exhausted.
+// Autosave calls pass { silent: true }: more attempts, no alert, just an inline status update --
+// low-stakes, shouldn't interrupt typing.
+function backoffDelay(attempt) {
+  const base = 700 * attempt;
+  const jitter = Math.random() * 300;
+  return new Promise(resolve => setTimeout(resolve, base + jitter));
+}
+
+function setSilentRetryStatus(message) {
+  const status = document.getElementById('load-status');
+  if (status) status.textContent = message;
+}
+
+async function callBackend(action, extra, opts) {
+  opts = opts || {};
+  const silent = !!opts.silent;
+  const studentId = document.getElementById('student-id').value.trim();
+  if (!studentId) { if (!silent) alert('Enter your name first.'); return null; }
+  const body = Object.assign({ secret: SHARED_SECRET, action: action, studentId: studentId }, extra || {});
+
+  const maxAttempts = silent ? 5 : 3;
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    try {
+      const res = await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(body)
+      });
+      const raw = await res.text();
+      try {
+        return JSON.parse(raw);
+      } catch (parseErr) {
+        // Not valid JSON -- likely an Apps Script busy/error page. Retryable.
+      }
+    } catch (networkErr) {
+      // Real network failure. Also retryable.
+    }
+    if (attempt < maxAttempts) {
+      if (silent) setSilentRetryStatus('Saving... (will retry)');
+      await backoffDelay(attempt);
+    }
+  }
+
+  if (silent) {
+    setSilentRetryStatus('Could not save just now — will retry on your next change.');
+  } else {
+    alert('The server is busy right now — please try again in a moment.');
+  }
+  return null;
+}
+
+async function askHelp(which) {
+  const isFirst = which === 'cv';
+  const docId = isFirst ? 'chunk-cv1' : 'chunk-jv1'; // representative passage
+  const label = isFirst ? "Address of the Colored State Convention (1865)" : "Johnson's Veto of the Freedmen's Bureau Bill (1866)";
+  const questionInput = document.getElementById(isFirst ? 'question-cv' : 'question-jv');
+  const question = questionInput.value.trim();
+  if (!question) { alert('Type your question first.'); return; }
+
+  const panel = document.getElementById(isFirst ? 'helper-cv' : 'helper-jv');
+  const attemptsSoFar = struggleLevels[which] || 0;
+  if (attemptsSoFar >= MAX_CHECK_ATTEMPTS) {
+    panel.style.display = 'block';
+    panel.innerHTML = "You've asked a few times on this document — go with your best understanding and move on. Flag it for your teacher if you're still stuck.";
+    return;
+  }
+  struggleLevels[which] = attemptsSoFar + 1;
+  panel.style.display = 'block';
+  panel.innerHTML = '<span class="locked">Thinking...</span>';
+
+  const fullText = isFirst
+    ? (document.getElementById('chunk-cv1').innerText + ' ' + document.getElementById('chunk-cv2').innerText + ' ' + document.getElementById('chunk-cv3').innerText)
+    : (document.getElementById('chunk-jv1').innerText + ' ' + document.getElementById('chunk-jv2').innerText + ' ' + document.getElementById('chunk-jv3').innerText);
+
+  const data = await callBackend('decode_help', {
+    documentLabel: label,
+    passageText: fullText.slice(0, 3500),
+    studentQuestion: question,
+    struggleLevel: struggleLevels[which]
+  });
+  if (!data) { panel.style.display = 'none'; return; }
+  panel.innerHTML = data.reply || data.error || 'No response.';
+}
+
+async function checkGuided(key, partLabel, passageElId, questionText) {
+  const answerEl = document.getElementById('answer-' + key);
+  const panel = document.getElementById('feedback-' + key);
+  const answer = answerEl.value.trim();
+  if (!answer) { alert('Write your answer first.'); return; }
+
+  const tagEl = document.getElementById('tag-' + key);
+  const lensEl = document.getElementById('lens-' + key);
+  const tagVal = tagEl ? tagEl.value : '';
+  const lensVal = lensEl ? lensEl.value : '';
+
+  const attemptsSoFar = guidedAttempts[key] || 0;
+  if (attemptsSoFar >= MAX_CHECK_ATTEMPTS) {
+    panel.style.display = 'block';
+    panel.innerHTML = "You've checked this a few times — go ahead and trust your answer and move on. Flag it for your teacher if you're still unsure.";
+    return;
+  }
+  guidedAttempts[key] = attemptsSoFar + 1;
+  panel.style.display = 'block';
+  panel.innerHTML = '<span class="locked">Thinking...</span>';
+
+  const passageText = document.getElementById(passageElId).innerText.slice(0, 3000);
+  const taggedContext = 'Student marked this passage as: ' + (tagVal || '(not yet marked)') +
+    ', lens: ' + (lensVal || '(not yet tagged)') + '. ' + questionText;
+
+  const data = await callBackend('guided_check', {
+    partLabel: partLabel, passageText: passageText, questionText: taggedContext,
+    studentAnswer: answer, attemptNumber: guidedAttempts[key]
+  });
+  if (!data) { panel.style.display = 'none'; return; }
+  panel.innerHTML = data.reply || data.error || 'No response.';
+}
+
+async function checkFishbowlPrep() {
+  const answer = document.getElementById('fishbowl-prep').value.trim();
+  const panel = document.getElementById('feedback-fishbowl');
+  if (!answer) { alert('Write something in the box first.'); return; }
+
+  const attemptsSoFar = guidedAttempts['fishbowl'] || 0;
+  if (attemptsSoFar >= MAX_CHECK_ATTEMPTS) {
+    panel.style.display = 'block';
+    panel.innerHTML = "You've checked this a few times — trust your position and get ready for the fishbowl. Flag it for your teacher if you're still unsure.";
+    return;
+  }
+  guidedAttempts['fishbowl'] = attemptsSoFar + 1;
+  panel.style.display = 'block';
+  panel.innerHTML = '<span class="locked">Thinking...</span>';
+
+  const data = await callBackend('guided_check', {
+    partLabel: 'Fishbowl Prep (draft position)',
+    passageText: "N/A — this is feedback on the student's own developing position, not a source excerpt.",
+    questionText: 'Does this response take a clear side on the contested claim (state courts can be trusted once federal oversight ends) AND back it with a specific, directly quoted piece of evidence from one of today\u2019s two documents?',
+    studentAnswer: answer,
+    attemptNumber: guidedAttempts['fishbowl']
+  });
+  if (!data) { panel.style.display = 'none'; return; }
+  panel.innerHTML = data.reply || data.error || 'No response.';
+}
+
+function getGuidedAnswers() {
+  const answers = {};
+  GUIDED_KEYS.forEach(k => {
+    if (k === 'fishbowl') { answers[k] = document.getElementById('fishbowl-prep').value; return; }
+    const el = document.getElementById('answer-' + k);
+    if (el) answers[k] = el.value;
+  });
+  return answers;
+}
+
+function countGuidedAnswers() {
+  return GUIDED_KEYS.filter(k => {
+    if (k === 'fishbowl') { return document.getElementById('fishbowl-prep').value.trim().length > 5; }
+    const el = document.getElementById('answer-' + k);
+    return el && el.value.trim().length > 5;
+  }).length;
+}
+
+let saveTimer = null;
+function scheduleAutoSave() { clearTimeout(saveTimer); saveTimer = setTimeout(saveState, 4000); }
+['other-notes-cv', 'other-notes-jv', 'fishbowl-prep',
+ 'answer-cv1', 'answer-cv2', 'answer-cv3', 'answer-jv1', 'answer-jv2', 'answer-jv3'].forEach(id => {
+  document.addEventListener('DOMContentLoaded', () => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('input', scheduleAutoSave);
+  });
+});
+
+async function saveState() {
+  const status = document.getElementById('load-status');
+  const data = await callBackend('save_state', collectState(), { silent: true });
+  if (data && data.saved && status) status.textContent = 'Saved ' + new Date().toLocaleTimeString();
+}
+
+function collectState() {
+  return {
+    openingWrite: '',
+    closingWrite: '',
+    mainResponse: document.getElementById('fishbowl-prep').value,
+    highlights: collectHighlights(),
+    highlightCount: countHighlights(),
+    guidedAnswers: getGuidedAnswers(),
+    guidedAnswersCount: countGuidedAnswers(),
+    guidedAnswersTotal: GUIDED_KEYS.length,
+    tags: collectTags(),
+    otherNotes: {
+      cv: document.getElementById('other-notes-cv').value,
+      jv: document.getElementById('other-notes-jv').value
+    },
+    vocabUsed: getUsedVocab(),
+    vocabList: VOCAB_LIST.map(v => v.term)
+  };
+}
+
+async function loadState() {
+  const status = document.getElementById('load-status');
+  status.textContent = 'Loading...';
+  const data = await callBackend('load_state', {});
+  if (!data || !data.found) { status.textContent = 'No saved work found yet — start typing below.'; return; }
+
+  document.getElementById('fishbowl-prep').value = data.mainResponse || '';
+  restoreHighlights(data.highlights);
+  restoreTags(data.tags);
+
+  const ga = data.guidedAnswers || {};
+  GUIDED_KEYS.forEach(k => {
+    if (k === 'fishbowl') return;
+    const el = document.getElementById('answer-' + k);
+    if (el && ga[k]) el.value = ga[k];
+  });
+
+  const notes = data.otherNotes || {};
+  document.getElementById('other-notes-cv').value = notes.cv || '';
+  document.getElementById('other-notes-jv').value = notes.jv || '';
+
+  renderVocabChecklist(getUsedVocab());
+  status.textContent = 'Work loaded.';
+}
+
+async function submitWork() {
+  const state = collectState();
+  const submitBtn = document.querySelector('button.primary');
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Getting feedback...';
+
+  const data = await callBackend('reflect_check', state);
+
+  submitBtn.disabled = false;
+  submitBtn.textContent = 'Submit for feedback';
+
+  const area = document.getElementById('completion-area');
+  if (!data) { area.innerHTML = ''; return; }
+  if (data.error) { area.innerHTML = '<div class="completion-box incomplete">' + data.error + '</div>'; return; }
+
+  const cls = data.complete ? 'pass' : 'incomplete';
+  const heading = data.complete ? 'Complete — nice work today.' : 'Not quite complete yet';
+  let checklistHtml = '';
+  if (!data.complete && data.checklist) {
+    checklistHtml = '<ul>';
+    if (!data.checklist.hasMainResponse) checklistHtml += '<li>Your Fishbowl Prep position needs more detail.</li>';
+    if (!data.checklist.hasHighlights) checklistHtml += '<li>Highlight at least one phrase in each document.</li>';
+    if (!data.checklist.vocabMet) checklistHtml += '<li>Use at least ' + data.checklist.vocabRequired + ' vocabulary words (currently ' + data.checklist.vocabCount + ').</li>';
+    if (!data.checklist.hasGuidedAnswers) checklistHtml += '<li>Answer at least ' + (data.checklist.guidedTotal - 1) + ' of the ' + data.checklist.guidedTotal + ' guided items.</li>';
+    checklistHtml += '</ul>';
+  }
+
+  let mockHtml = '';
+  if (data.mockRubric && data.feedbackGenerated) {
+    const ev = data.mockRubric.evidence, rs = data.mockRubric.reasoning;
+    mockHtml = '<div class="mock-banner"><strong>Practice score preview</strong> — this is NOT your grade for today. ' +
+      'Your official grade today is completion (above). This preview shows how this response would land on two ' +
+      'rubric criteria, so you can see where to grow before the graded CER later in the unit.</div>' +
+      '<div class="mock-cards">' +
+        '<div class="mock-card"><h4>Use of Evidence</h4><div class="range">' + (ev ? ev.range : 'N/A') + '</div><div>' + (ev ? ev.feedback : '') + '</div>' +
+          '<div class="improve"><strong>Next step:</strong> ' + (ev ? ev.improve : '') + '</div></div>' +
+        '<div class="mock-card"><h4>Analysis and Reasoning</h4><div class="range">' + (rs ? rs.range : 'N/A') + '</div><div>' + (rs ? rs.feedback : '') + '</div>' +
+          '<div class="improve"><strong>Next step:</strong> ' + (rs ? rs.improve : '') + '</div></div>' +
+      '</div>';
+  } else if (data.feedbackGenerated === false) {
+    mockHtml = '<div class="mock-banner"><strong>Practice preview unavailable right now</strong> — the coaching ' +
+      'AI didn\u2019t respond in time. Your completion grade above is still recorded correctly. Try Submit again ' +
+      'in a minute, or flag it for your teacher.</div>';
+  }
+
+  area.innerHTML = '<div class="completion-box ' + cls + '"><strong>' + heading + '</strong>' + checklistHtml + '</div>' + mockHtml;
+}
+
+function downloadWork() {
+  const val = id => { const el = document.getElementById(id); return el ? el.value : ''; };
+  const sel = id => { const el = document.getElementById(id); return el ? (el.options[el.selectedIndex] ? el.options[el.selectedIndex].text : '') : ''; };
+  const esc = s => (s || '').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  const studentId = document.getElementById('student-id').value.trim() || '(no name entered)';
+  const now = new Date().toLocaleString();
+
+  const html = `
+    <h1>Day 3 Close Read — ${esc(studentId)}</h1>
+    <div class="p-label">Printed: ${now}</div>
+
+    <h2>Document 1: Address of the Colored State Convention (with your highlights)</h2>
+    <div class="p-doc">${document.getElementById('chunk-cv1').innerHTML}</div>
+    <div class="p-label">Passage 1 — ${esc(sel('tag-cv1'))} / ${esc(sel('lens-cv1'))}</div>
+    <div class="p-block">${esc(val('answer-cv1')) || '(not yet answered)'}</div>
+    <div class="p-doc">${document.getElementById('chunk-cv2').innerHTML}</div>
+    <div class="p-label">Passage 2 — ${esc(sel('tag-cv2'))} / ${esc(sel('lens-cv2'))}</div>
+    <div class="p-block">${esc(val('answer-cv2')) || '(not yet answered)'}</div>
+    <div class="p-doc">${document.getElementById('chunk-cv3').innerHTML}</div>
+    <div class="p-label">Passage 3 — ${esc(sel('tag-cv3'))} / ${esc(sel('lens-cv3'))}</div>
+    <div class="p-block">${esc(val('answer-cv3')) || '(not yet answered)'}</div>
+    <div class="p-label">Other notes on this document</div>
+    <div class="p-block">${esc(val('other-notes-cv')) || '(none)'}</div>
+
+    <h2>Document 2: Johnson's Veto of the Freedmen's Bureau Bill (with your highlights)</h2>
+    <div class="p-doc">${document.getElementById('chunk-jv1').innerHTML}</div>
+    <div class="p-label">Passage 1 — ${esc(sel('tag-jv1'))} / ${esc(sel('lens-jv1'))}</div>
+    <div class="p-block">${esc(val('answer-jv1')) || '(not yet answered)'}</div>
+    <div class="p-doc">${document.getElementById('chunk-jv2').innerHTML}</div>
+    <div class="p-label">Passage 2 — ${esc(sel('tag-jv2'))} / ${esc(sel('lens-jv2'))}</div>
+    <div class="p-block">${esc(val('answer-jv2')) || '(not yet answered)'}</div>
+    <div class="p-doc">${document.getElementById('chunk-jv3').innerHTML}</div>
+    <div class="p-label">Passage 3 — ${esc(sel('tag-jv3'))} / ${esc(sel('lens-jv3'))}</div>
+    <div class="p-block">${esc(val('answer-jv3')) || '(not yet answered)'}</div>
+    <div class="p-label">Other notes on this document</div>
+    <div class="p-block">${esc(val('other-notes-jv')) || '(none)'}</div>
+
+    <h2>Fishbowl Prep: Which document wins the argument?</h2>
+    <div class="p-label">Vocabulary used: ${(getUsedVocab().map(t => VOCAB_LIST.find(v => v.term === t).label).join(', ')) || 'none yet'}</div>
+    <div class="p-block">${esc(val('fishbowl-prep')) || '(not yet written)'}</div>
+
+    <h2>Feedback received</h2>
+    <div class="p-block">${document.getElementById('completion-area').innerHTML || '(not yet submitted for feedback)'}</div>
+  `;
+
+  document.getElementById('print-summary').innerHTML = html;
+  document.body.classList.add('printing');
+  window.print();
+}
+
+window.addEventListener('afterprint', () => {
+  document.body.classList.remove('printing');
+});
+</script>
+
+</body>
+</html>
