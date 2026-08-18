@@ -59,6 +59,9 @@
   .vocab-definition.show { display: block; }
   .vocab-status { font-family: Arial, sans-serif; font-size: 0.85rem; margin-top: 4px; }
 
+  .vocab-quickref { background: #fbfaf7; border: 1px dashed var(--gold); border-radius: 6px; padding: 12px 16px; margin: 14px 0 20px 0; }
+  .vocab-quickref-label { font-family: Arial, sans-serif; font-size: 0.82rem; color: var(--accent); font-weight: bold; margin-bottom: 6px; }
+
   .try-first-note { font-family: Arial, sans-serif; font-size: 0.78rem; color: #888; margin: 4px 0; }
   .paste-warning { color: #a33; font-size: 12.5px; margin-top: 4px; font-family: Arial, sans-serif; }
   .save-indicator { font-family: Arial, sans-serif; font-size: 0.8rem; color: #888; margin-top: 4px; }
@@ -129,6 +132,13 @@
 <div class="legend">
   <span><span class="swatch" style="background:var(--green-strong);"></span>Green highlight = evidence of something ACHIEVED</span>
   <span><span class="swatch" style="background:var(--red-strong);"></span>Red highlight = evidence of something BLOCKED</span>
+</div>
+
+<!-- ============ QUICK VOCABULARY REFERENCE (top of page) ============ -->
+<div class="vocab-quickref">
+  <div class="vocab-quickref-label">Quick vocabulary reference — click a word any time you need it</div>
+  <div class="vocab-checklist" id="vocab-checklist-top"></div>
+  <div class="vocab-definition" id="vocab-definition-top"></div>
 </div>
 
 <!-- ============ DOCUMENT 1: COLORED CONVENTION ADDRESS ============ -->
@@ -326,7 +336,7 @@
 
 <script>
 // ============ CONFIG — must match Code.gs ============
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwKv0oplbmodxaXqnIwxkA17zQY8ttDXCfocVuqxWtTpU7vjhvkus53cRsm-ztdifXT/exec';
+const APPS_SCRIPT_URL = 'PASTE_YOUR_DAY_3_WEB_APP_URL_HERE';
 const SHARED_SECRET = 'V4cgEurJBSlvvD3L2Pb04UbfWzJdlEq';
 // =======================================================
 
@@ -345,7 +355,7 @@ const MAX_CHECK_ATTEMPTS = 3;
 let struggleLevels = { 'cv': 0, 'jv': 0 };
 let guidedAttempts = {};
 
-// ---------- Vocabulary checklist ----------
+// ---------- Vocabulary checklist (tracked, near Fishbowl Prep) ----------
 function renderVocabChecklist(usedTerms) {
   const container = document.getElementById('vocab-checklist');
   container.innerHTML = '';
@@ -355,18 +365,35 @@ function renderVocabChecklist(usedTerms) {
     chip.textContent = v.label;
     chip.setAttribute('role', 'button');
     chip.setAttribute('tabindex', '0');
-    chip.onclick = () => showDefinition(v.term);
-    chip.onkeypress = (e) => { if (e.key === 'Enter' || e.key === ' ') showDefinition(v.term); };
+    chip.onclick = () => showDefinition(v.term, 'vocab-definition');
+    chip.onkeypress = (e) => { if (e.key === 'Enter' || e.key === ' ') showDefinition(v.term, 'vocab-definition'); };
     container.appendChild(chip);
   });
   document.getElementById('vocab-status').textContent =
     usedTerms.length + ' of ' + VOCAB_REQUIRED + ' required vocabulary words used.';
 }
 
-function showDefinition(term) {
-  const box = document.getElementById('vocab-definition');
+// ---------- Quick vocabulary reference (top of page, lookup only, no usage tracking) ----------
+function renderVocabQuickRef() {
+  const container = document.getElementById('vocab-checklist-top');
+  if (!container) return;
+  container.innerHTML = '';
+  VOCAB_LIST.forEach(v => {
+    const chip = document.createElement('span');
+    chip.className = 'vocab-chip';
+    chip.textContent = v.label;
+    chip.setAttribute('role', 'button');
+    chip.setAttribute('tabindex', '0');
+    chip.onclick = () => showDefinition(v.term, 'vocab-definition-top');
+    chip.onkeypress = (e) => { if (e.key === 'Enter' || e.key === ' ') showDefinition(v.term, 'vocab-definition-top'); };
+    container.appendChild(chip);
+  });
+}
+
+function showDefinition(term, boxId) {
+  const box = document.getElementById(boxId || 'vocab-definition');
   const entry = VOCAB_LIST.find(v => v.term === term);
-  if (!entry) return;
+  if (!entry || !box) return;
   if (box.classList.contains('show') && box.dataset.term === term) {
     box.classList.remove('show');
     box.dataset.term = '';
@@ -384,6 +411,7 @@ function getUsedVocab() {
 
 document.addEventListener('DOMContentLoaded', () => {
   renderVocabChecklist([]);
+  renderVocabQuickRef();
   document.getElementById('fishbowl-prep').addEventListener('input', () => {
     renderVocabChecklist(getUsedVocab());
   });
