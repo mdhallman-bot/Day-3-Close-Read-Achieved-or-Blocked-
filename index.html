@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Day 3 Close Read — Claimed or Blocked?</title>
+<title>Day 3 Close Read — Achieved or Blocked?</title>
 <style>
   :root {
     --ink: #2a2a2a; --paper: #faf8f3; --accent: #6b5b3e; --gold: #b08d57;
@@ -81,25 +81,6 @@
   .mock-card .range { font-weight: bold; color: #4a5fa8; margin-bottom: 6px; }
   .mock-card .improve { margin-top: 8px; padding-top: 8px; border-top: 1px dashed #ccc; font-size: 0.85rem; }
 
-  .sentence-frames { background: #fbfaf7; border: 1px dashed var(--gold); border-radius: 6px; padding: 12px 16px; margin: 10px 0 16px 0; font-family: Arial, sans-serif; font-size: 0.85rem; }
-  .sentence-frames-label { font-weight: bold; color: var(--accent); margin-bottom: 6px; }
-  .sentence-frames ul { margin: 4px 0 0 0; padding-left: 18px; }
-  .sentence-frames li { margin-bottom: 4px; }
-
-  .goals-preview { margin: 14px 0 24px 0; }
-  .goals-preview-intro { font-family: Arial, sans-serif; font-size: 0.9rem; color: #555; margin-bottom: 10px; }
-  .goals-columns { display: flex; gap: 16px; flex-wrap: wrap; }
-  .goals-col { flex: 1; min-width: 280px; border-radius: 6px; padding: 14px 16px; font-family: Arial, sans-serif; }
-  .goals-col.doc1 { background: #eef1fb; border-left: 4px solid var(--navy); }
-  .goals-col.doc2 { background: var(--panel); border-left: 4px solid var(--gold); }
-  .goals-col h4 { margin: 0 0 8px 0; font-size: 0.95rem; }
-  .goals-col.doc1 h4 { color: var(--navy); }
-  .goals-col.doc2 h4 { color: var(--accent); }
-  .goal-item { display: flex; align-items: flex-start; gap: 8px; font-size: 0.88rem; margin-bottom: 8px; cursor: pointer; }
-  .goal-item input[type="checkbox"] { margin-top: 3px; flex-shrink: 0; }
-  .goal-item span { line-height: 1.4; }
-  .goal-item.checked span { color: #4a8f52; text-decoration: line-through; text-decoration-color: #4a8f52; }
-
   @media print {
     button, .id-bar { display: none !important; }
     body.printing > *:not(#print-summary) { display: none !important; }
@@ -114,7 +95,7 @@
 </head>
 <body>
 
-<h1>Day 3 Close Read: Claimed or Blocked?</h1>
+<h1>Day 3 Close Read: Achieved or Blocked?</h1>
 <div class="subtitle">Unit 1: Reconstruction &amp; the Rise of Jim Crow — SQ1 Research &amp; Evaluate</div>
 
 <div class="rubric-note">
@@ -123,8 +104,8 @@
   later this unit: <strong>Use of Evidence</strong> and <strong>Analysis and Reasoning</strong>. At the end
   you'll get a labeled <em>practice preview</em> of how your work would score on those two criteria — that's
   feedback to help you improve, not your grade for today. <strong>Your annotations here are also your
-  material for today's Evidence Wall</strong> — the more specific your evidence, the stronger your
-  contribution to the shared chart paper.
+  ammunition for today's Evidence Wall activity</strong> — the more specific your evidence, the stronger your
+  contribution to the chart.
 </div>
 
 <div class="id-bar">
@@ -145,70 +126,12 @@
 
 <!-- ============ ANNOTATION GUIDE / LEGEND ============ -->
 <h2>The Big Three: how to annotate today</h2>
-<p style="font-family:Arial, sans-serif; font-size:0.9rem;">For every passage below, you'll do three things: tag it <strong>Claimed</strong> or
-  <strong>Denied/Blocked</strong> — always from the perspective of formerly enslaved people's goals, even
-  when you're reading Document 2 — tag which <strong>lens</strong> fits best, and highlight your
+<p style="font-family:Arial, sans-serif; font-size:0.9rem;">For every passage below, you'll do three things: mark it <strong>Achieved</strong> or
+  <strong>Blocked</strong> (for formerly enslaved people's goals), tag which <strong>lens</strong> fits best, and highlight your
   evidence in the text.</p>
-<div class="context-strip">
-  <strong>Important:</strong> Neither document alone can tell you whether a goal was ultimately achieved —
-  that's a bigger question we build toward across the whole unit, especially on Day 4. Today, tag what THIS
-  specific document shows you happening right now, in 1865–66: is a goal or right being
-  <strong>claimed</strong>, or is it being <strong>denied or blocked</strong>?
-</div>
 <div class="legend">
-  <span><span class="swatch" style="background:var(--green-strong);"></span>Green highlight = a goal or right being CLAIMED</span>
-  <span><span class="swatch" style="background:var(--red-strong);"></span>Red highlight = a goal or right being DENIED or BLOCKED right now</span>
-</div>
-
-<!-- ============ GOALS REFERENCE SHEET ============ -->
-<h2>Before you read: what was each side actually asking for?</h2>
-<div class="goals-preview">
-  <div class="goals-preview-intro">
-    You and a partner should already have sorted these into two lists during today's warm-up. Check a box
-    below once you find a line in the documents that connects to that goal — whether it's being claimed,
-    denied, or somewhere in between. Keep this list open while you annotate; the guided questions will ask
-    you to name which goal a passage connects to.
-  </div>
-  <div class="goals-columns">
-    <div class="goals-col doc1">
-      <h4>Document 1 — Formerly Enslaved People (Colored Convention)</h4>
-      <label class="goal-item" data-goal="goal-cv-1">
-        <input type="checkbox" id="goal-cv-1">
-        <span>Full citizenship — not to be treated as "strangers" in the state where they were born and raised</span>
-      </label>
-      <label class="goal-item" data-goal="goal-cv-2">
-        <input type="checkbox" id="goal-cv-2">
-        <span>"Even-handed justice" — equal treatment under the law, not special favors</span>
-      </label>
-      <label class="goal-item" data-goal="goal-cv-3">
-        <input type="checkbox" id="goal-cv-3">
-        <span>Removal of the "obstructions and disabilities" recent laws have added on top of them since the war</span>
-      </label>
-      <label class="goal-item" data-goal="goal-cv-4">
-        <input type="checkbox" id="goal-cv-4">
-        <span>The right to testify in court, so violence and theft against them can actually be punished</span>
-      </label>
-    </div>
-    <div class="goals-col doc2">
-      <h4>Document 2 — Johnson &amp; Southern Democrats (Veto Message)</h4>
-      <label class="goal-item" data-goal="goal-jv-1">
-        <input type="checkbox" id="goal-jv-1">
-        <span>No need to act — the current Freedmen's Bureau law hasn't expired yet ("no immediate necessity")</span>
-      </label>
-      <label class="goal-item" data-goal="goal-jv-2">
-        <input type="checkbox" id="goal-jv-2">
-        <span>Keep government small — a federal agent in every county costs too much and keeps growing</span>
-      </label>
-      <label class="goal-item" data-goal="goal-jv-3">
-        <input type="checkbox" id="goal-jv-3">
-        <span>Trust the courts — once state and federal courts are "restored," they will already protect everyone's rights</span>
-      </label>
-      <label class="goal-item" data-goal="goal-jv-4">
-        <input type="checkbox" id="goal-jv-4">
-        <span>Return power to the states — decisions about freedpeople's lives belong at the state/local level, not Washington</span>
-      </label>
-    </div>
-  </div>
+  <span><span class="swatch" style="background:var(--green-strong);"></span>Green highlight = evidence of something ACHIEVED</span>
+  <span><span class="swatch" style="background:var(--red-strong);"></span>Red highlight = evidence of something BLOCKED</span>
 </div>
 
 <!-- ============ QUICK VOCABULARY REFERENCE (top of page) ============ -->
@@ -221,35 +144,19 @@
 <!-- ============ DOCUMENT 1: COLORED CONVENTION ADDRESS ============ -->
 <h2>Document 1: Address of the Colored State Convention to the People of South Carolina</h2>
 <div class="doc-meta">Charleston, South Carolina — November 24, 1865. Delegates of formerly enslaved and free Black South Carolinians, gathered five months after the war's end, speaking directly to the state's white citizens.</div>
-
-<!-- Scaffold: document-specific word glossary, framed as available to everyone rather than
-     singled out, per district guidance on not visibly labeling English Learner supports. -->
-<div class="vocab-quickref">
-  <div class="vocab-quickref-label">Word help for this document — click a word any time you need it</div>
-  <div class="vocab-checklist" id="glossary-cv"></div>
-  <div class="vocab-definition" id="glossary-def-cv"></div>
-</div>
-<div class="sentence-frames">
-  <div class="sentence-frames-label">Sentence starters — use these if you want a way to begin</div>
-  <ul>
-    <li>"This passage shows the delegates [claiming / being denied] the right to ______, because the text says '______.'"</li>
-    <li>"This connects to the goal of ______ because ______."</li>
-  </ul>
-</div>
-
 <p style="font-family:Arial, sans-serif; font-size:0.88rem;">Select text, then click a color to highlight your evidence.</p>
-<button class="highlight-btn green" onclick="applyHighlight('green')">Highlight: Claimed</button>
-<button class="highlight-btn red" onclick="applyHighlight('red')">Highlight: Denied/Blocked</button>
+<button class="highlight-btn green" onclick="applyHighlight('green')">Highlight: Achieved</button>
+<button class="highlight-btn red" onclick="applyHighlight('red')">Highlight: Blocked</button>
 <button onclick="applyHighlight(null)">Clear highlight</button>
 
 <div class="clause-label">Passage 1 — Who is speaking, and why</div>
 <div class="source-text" id="chunk-cv1" contenteditable="true" spellcheck="false">We have assembled as delegates representing the colored people of the State of South Carolina, in the capacity of State Convention, to confer together and to deliberate upon our intellectual, moral, industrial, civil, and political condition as affected by the great changes which have taken place in this State.</div>
 <div class="guided-block">
-  <div class="guided-question"><strong>Guiding question:</strong> What change gives these delegates the standing to speak this way, in public, to the whole state? Does the act of holding this convention show a right already being claimed and exercised, or something still out of reach? Which goal from today's list does this connect to?</div>
+  <div class="guided-question"><strong>Guiding question:</strong> What change gives these delegates the standing to speak this way, in public, to the whole state? What does the act of holding this convention itself tell you — achieved or still in progress?</div>
   <div class="big-three-row">
     <div class="big-three-field">
-      <label for="tag-cv1">Claimed or Denied/Blocked?</label>
-      <select id="tag-cv1"><option value="">-- choose --</option><option value="claimed">Claimed</option><option value="denied">Denied/Blocked</option></select>
+      <label for="tag-cv1">Achieved or Blocked?</label>
+      <select id="tag-cv1"><option value="">-- choose --</option><option value="achieved">Achieved</option><option value="blocked">Blocked</option></select>
     </div>
     <div class="big-three-field">
       <label for="lens-cv1">Lens</label>
@@ -258,18 +165,18 @@
   </div>
   <textarea class="small" id="answer-cv1" placeholder="Your explanation, using the text..."></textarea>
   <div class="try-first-note">Write your own answer first — the check button unlocks after a few sentences.</div>
-  <button id="checkbtn-cv1" onclick="checkGuided('cv1','Convention Address — Passage 1','chunk-cv1','Does holding this convention show a right already being claimed and exercised, or still out of reach? Which lens fits?')">Check my understanding</button>
+  <button id="checkbtn-cv1" onclick="checkGuided('cv1','Convention Address — Passage 1','chunk-cv1','What does holding this convention itself tell you — achieved or still in progress? Which lens fits?')">Check my understanding</button>
   <div class="helper-panel" id="feedback-cv1" style="display:none;"></div>
 </div>
 
 <div class="clause-label">Passage 2 — What they're asking for</div>
 <div class="source-text" id="chunk-cv2" contenteditable="true" spellcheck="false">We ask for no special privileges, or peculiar favors. We ask only for even-handed justice — for the removal of such positive obstructions and disabilities as past and recent legislation has thrown in our way and heaped upon us.</div>
 <div class="guided-block">
-  <div class="guided-question"><strong>Guiding question:</strong> The delegates are careful to say they want "even-handed justice," not "special privileges." Why might that distinction have mattered to their audience? Is this passage naming a goal they're claiming, or naming something currently denied to them — and what lens fits? Which goal from today's list does this connect to?</div>
+  <div class="guided-question"><strong>Guiding question:</strong> The delegates are careful to say they want "even-handed justice," not "special privileges." Why might that distinction have mattered to their audience? Is the goal here achieved or blocked, and what lens fits?</div>
   <div class="big-three-row">
     <div class="big-three-field">
-      <label for="tag-cv2">Claimed or Denied/Blocked?</label>
-      <select id="tag-cv2"><option value="">-- choose --</option><option value="claimed">Claimed</option><option value="denied">Denied/Blocked</option></select>
+      <label for="tag-cv2">Achieved or Blocked?</label>
+      <select id="tag-cv2"><option value="">-- choose --</option><option value="achieved">Achieved</option><option value="blocked">Blocked</option></select>
     </div>
     <div class="big-three-field">
       <label for="lens-cv2">Lens</label>
@@ -278,18 +185,18 @@
   </div>
   <textarea class="small" id="answer-cv2" placeholder="Your explanation, using the text..."></textarea>
   <div class="try-first-note">Write your own answer first — the check button unlocks after a few sentences.</div>
-  <button id="checkbtn-cv2" onclick="checkGuided('cv2','Convention Address — Passage 2','chunk-cv2','Why distinguish justice from special privileges? Is this a goal being claimed or something currently denied, and which lens?')">Check my understanding</button>
+  <button id="checkbtn-cv2" onclick="checkGuided('cv2','Convention Address — Passage 2','chunk-cv2','Why distinguish justice from special privileges? Achieved or blocked, and which lens?')">Check my understanding</button>
   <div class="helper-panel" id="feedback-cv2" style="display:none;"></div>
 </div>
 
 <div class="clause-label">Passage 3 — What's still blocked</div>
 <div class="source-text" id="chunk-cv3" contenteditable="true" spellcheck="false">We... have, with few exceptions, been virtually excluded from the rights of citizenship, which you cheerfully accord to strangers, notwithstanding we have been born and reared in your midst. We are denied the right of giving our testimony in the courts of the State, in consequence of which our persons and property are subject to every species of violence and insult, and fraud and spoliation, without redress.</div>
 <div class="guided-block">
-  <div class="guided-question"><strong>Guiding question:</strong> Name one specific right this passage says is denied. What real, everyday consequence does that denial have, according to the text? Mark it and tag the lens. Which goal from today's list does this connect to?</div>
+  <div class="guided-question"><strong>Guiding question:</strong> Name one specific right this passage says is denied. What real, everyday consequence does that denial have, according to the text? Mark it and tag the lens.</div>
   <div class="big-three-row">
     <div class="big-three-field">
-      <label for="tag-cv3">Claimed or Denied/Blocked?</label>
-      <select id="tag-cv3"><option value="">-- choose --</option><option value="claimed">Claimed</option><option value="denied">Denied/Blocked</option></select>
+      <label for="tag-cv3">Achieved or Blocked?</label>
+      <select id="tag-cv3"><option value="">-- choose --</option><option value="achieved">Achieved</option><option value="blocked">Blocked</option></select>
     </div>
     <div class="big-three-field">
       <label for="lens-cv3">Lens</label>
@@ -315,35 +222,19 @@
 <!-- ============ DOCUMENT 2: JOHNSON VETO ============ -->
 <h2>Document 2: President Andrew Johnson's Veto of the Freedmen's Bureau Bill</h2>
 <div class="doc-meta">Washington, D.C. — February 19, 1866. Johnson's message returning to Congress a bill that would have extended and strengthened the Freedmen's Bureau.</div>
-
-<!-- Scaffold: document-specific word glossary, framed as available to everyone rather than
-     singled out, per district guidance on not visibly labeling English Learner supports. -->
-<div class="vocab-quickref">
-  <div class="vocab-quickref-label">Word help for this document — click a word any time you need it</div>
-  <div class="vocab-checklist" id="glossary-jv"></div>
-  <div class="vocab-definition" id="glossary-def-jv"></div>
-</div>
-<div class="sentence-frames">
-  <div class="sentence-frames-label">Sentence starters — use these if you want a way to begin</div>
-  <ul>
-    <li>"Johnson argues ______, which would [claim / deny or block] the right to ______ for formerly enslaved people, because the text says '______.'"</li>
-    <li>"This connects to the goal of ______ because ______."</li>
-  </ul>
-</div>
-
 <p style="font-family:Arial, sans-serif; font-size:0.88rem;">Highlight the same way as above.</p>
-<button class="highlight-btn green" onclick="applyHighlight('green')">Highlight: Claimed</button>
-<button class="highlight-btn red" onclick="applyHighlight('red')">Highlight: Denied/Blocked</button>
+<button class="highlight-btn green" onclick="applyHighlight('green')">Highlight: Achieved</button>
+<button class="highlight-btn red" onclick="applyHighlight('red')">Highlight: Blocked</button>
 <button onclick="applyHighlight(null)">Clear highlight</button>
 
 <div class="clause-label">Passage 1 — No necessity claim</div>
 <div class="source-text" id="chunk-jv1" contenteditable="true" spellcheck="false">There is no immediate necessity for the proposed measure. The act to establish a bureau for the relief of freedmen and refugees, which was approved in the month of March last, has not yet expired. It was thought stringent and extensive enough for the purpose in view in time of war.</div>
 <div class="guided-block">
-  <div class="guided-question"><strong>Guiding question:</strong> Johnson says a stronger Bureau bill isn't necessary. Whose interests does this argument serve? From the perspective of formerly enslaved people, does this argument work to deny or block one of their goals? Tag it and mark the lens. Which goal from today's list does this connect to?</div>
+  <div class="guided-question"><strong>Guiding question:</strong> Johnson says a stronger Bureau bill isn't necessary. Whose interests does this argument serve? From the perspective of formerly enslaved people, is this passage evidence of something achieved or something blocked? Tag the lens.</div>
   <div class="big-three-row">
     <div class="big-three-field">
-      <label for="tag-jv1">Claimed or Denied/Blocked?</label>
-      <select id="tag-jv1"><option value="">-- choose --</option><option value="claimed">Claimed</option><option value="denied">Denied/Blocked</option></select>
+      <label for="tag-jv1">Achieved or Blocked?</label>
+      <select id="tag-jv1"><option value="">-- choose --</option><option value="achieved">Achieved</option><option value="blocked">Blocked</option></select>
     </div>
     <div class="big-three-field">
       <label for="lens-jv1">Lens</label>
@@ -352,18 +243,18 @@
   </div>
   <textarea class="small" id="answer-jv1" placeholder="Your explanation, using the text..."></textarea>
   <div class="try-first-note">Write your own answer first — the check button unlocks after a few sentences.</div>
-  <button id="checkbtn-jv1" onclick="checkGuided('jv1','Johnson Veto — Passage 1','chunk-jv1','Whose interests does the no-necessity claim serve? Does it deny or block a goal for freedpeople, and which lens?')">Check my understanding</button>
+  <button id="checkbtn-jv1" onclick="checkGuided('jv1','Johnson Veto — Passage 1','chunk-jv1','Whose interests does the no-necessity claim serve? Achieved or blocked for freedpeople, and which lens?')">Check my understanding</button>
   <div class="helper-panel" id="feedback-jv1" style="display:none;"></div>
 </div>
 
 <div class="clause-label">Passage 2 — Cost and scale objection</div>
 <div class="source-text" id="chunk-jv2" contenteditable="true" spellcheck="false">The appointment of an agent for every county and parish will create an immense patronage; and the expense of the numerous officers and their clerks, to be appointed by the President, will be great in the beginning, with a tendency steadily to increase.</div>
 <div class="guided-block">
-  <div class="guided-question"><strong>Guiding question:</strong> What specific goal does this objection block, and for whom? Would a formerly enslaved person reading this in 1866 see it as a fair, neutral concern — or something else? Explain, and tag it. Which goal from today's list does this connect to?</div>
+  <div class="guided-question"><strong>Guiding question:</strong> What specific goal does this objection block, and for whom? Would a formerly enslaved person reading this in 1866 see it as a fair, neutral concern — or something else? Explain, and tag it.</div>
   <div class="big-three-row">
     <div class="big-three-field">
-      <label for="tag-jv2">Claimed or Denied/Blocked?</label>
-      <select id="tag-jv2"><option value="">-- choose --</option><option value="claimed">Claimed</option><option value="denied">Denied/Blocked</option></select>
+      <label for="tag-jv2">Achieved or Blocked?</label>
+      <select id="tag-jv2"><option value="">-- choose --</option><option value="achieved">Achieved</option><option value="blocked">Blocked</option></select>
     </div>
     <div class="big-three-field">
       <label for="lens-jv2">Lens</label>
@@ -379,11 +270,11 @@
 <div class="clause-label">Passage 3 — Trust in the state courts</div>
 <div class="source-text" id="chunk-jv3" contenteditable="true" spellcheck="false">With the Federal courts restored and those of the several States in the full exercise of their functions, the rights and interests of all classes of people will, with the aid of the military in cases of resistance to the laws, be essentially protected against unconstitutional infringement or violation.</div>
 <div class="guided-block">
-  <div class="guided-question"><strong>Guiding question:</strong> Johnson claims the state courts, once "restored," will protect everyone's rights. Compare this directly to Document 1, Passage 3 — what did the Convention delegates say about those same state courts? Mark this passage and tag the lens. Which goal from today's list does this connect to?</div>
+  <div class="guided-question"><strong>Guiding question:</strong> Johnson claims the state courts, once "restored," will protect everyone's rights. Compare this directly to Document 1, Passage 3 — what did the Convention delegates say about those same state courts? Mark this passage and tag the lens.</div>
   <div class="big-three-row">
     <div class="big-three-field">
-      <label for="tag-jv3">Claimed or Denied/Blocked?</label>
-      <select id="tag-jv3"><option value="">-- choose --</option><option value="claimed">Claimed</option><option value="denied">Denied/Blocked</option></select>
+      <label for="tag-jv3">Achieved or Blocked?</label>
+      <select id="tag-jv3"><option value="">-- choose --</option><option value="achieved">Achieved</option><option value="blocked">Blocked</option></select>
     </div>
     <div class="big-three-field">
       <label for="lens-jv3">Lens</label>
@@ -406,52 +297,77 @@
 <h3>Other notes on this document (optional, just for you)</h3>
 <textarea class="notes-box" id="other-notes-jv" placeholder="Anything else you want to jot down..."></textarea>
 
-<!-- ============ EVIDENCE WALL PREP / SYNTHESIS ============ -->
-<h2>Evidence Wall Prep: Getting Ready for All Four Charts</h2>
-<div class="claim-card">
-  <div style="font-family:Arial, sans-serif; font-size:0.82rem; font-weight:bold; color:var(--accent); text-transform:uppercase;">Today's contested claim</div>
-  <div class="claim-text">"The state courts can be trusted to protect the rights of formerly enslaved people once federal oversight ends."</div>
-  <div style="font-family:Arial, sans-serif; font-size:0.85rem; color:#555;">Document 1 (Convention Address) argues <strong>no</strong>. Document 2 (Johnson's veto) argues <strong>yes</strong>.</div>
-</div>
+<!-- ============ EVIDENCE WALL (replaces Fishbowl Prep today) ============ -->
+<h2>Evidence Wall: Your Question, Then the Gallery</h2>
 <p style="font-family:Arial, sans-serif; font-size:0.9rem; color:#555;">
-  In your group, each person gets assigned ONE of four questions: <strong>Chart 1</strong> (evidence in
-  Document 1), <strong>Chart 2</strong> (is Document 1's case convincing?), <strong>Chart 3</strong>
-  (evidence in Document 2), or <strong>Chart 4</strong> (is Document 2's case convincing?). You won't know
-  which one until your group divides them up. Use the box below to get ready for any of the four: jot down
-  your strongest CLAIMED or DENIED/BLOCKED evidence from each document, plus a quick note on whether you
-  personally find each document's case convincing and why.
+  Today's fishbowl is postponed — instead your group is building an Evidence Wall on chart paper. Everything
+  for that activity lives right here, so you shouldn't need a separate paper handout.
 </p>
 
-<!-- Scaffold: sentence starters, framed as available to everyone rather than singled out,
-     per district guidance on not visibly labeling English Learner supports. -->
-<div class="sentence-frames">
-  <div class="sentence-frames-label">Sentence starters — use these if you want a way to begin</div>
-  <ul>
-    <li>"For Chart 1 or 3 (evidence): [Document] shows ______ by saying '______.' This is evidence of a goal being claimed / denied or blocked."</li>
-    <li>"For Chart 2 or 4 (convincing?): I find [Document]'s case [convincing / not convincing] because ______."</li>
-  </ul>
+<div class="claim-card">
+  <div style="font-family:Arial, sans-serif; font-size:0.82rem; font-weight:bold; color:var(--accent); text-transform:uppercase;">The four chart questions</div>
+  <table style="width:100%; border-collapse:collapse; font-family:Arial, sans-serif; font-size:0.88rem; margin-top:8px;">
+    <tr><td style="padding:4px 8px; font-weight:bold; color:var(--navy); vertical-align:top;">Chart 1</td><td style="padding:4px 8px;">What evidence in the Convention Address shows something ACHIEVED or BLOCKED?</td></tr>
+    <tr><td style="padding:4px 8px; font-weight:bold; color:var(--navy); vertical-align:top;">Chart 2</td><td style="padding:4px 8px;">Do you find the delegates' case convincing? Why or why not?</td></tr>
+    <tr><td style="padding:4px 8px; font-weight:bold; color:var(--navy); vertical-align:top;">Chart 3</td><td style="padding:4px 8px;">What evidence in Johnson's veto shows something ACHIEVED or BLOCKED, from his point of view?</td></tr>
+    <tr><td style="padding:4px 8px; font-weight:bold; color:var(--navy); vertical-align:top;">Chart 4</td><td style="padding:4px 8px;">Do you find Johnson's case convincing? Why or why not?</td></tr>
+  </table>
 </div>
 
-<h3>Vocabulary — click a word for its definition. Use at least half of these in your writing below.</h3>
+<h3>Step 1: Your assigned question</h3>
+<div class="big-three-row">
+  <div class="big-three-field" style="min-width:220px;">
+    <label for="ew-question-select">Which question is your group having you answer?</label>
+    <select id="ew-question-select">
+      <option value="">-- choose --</option>
+      <option value="1">Chart 1 — Doc 1 Evidence</option>
+      <option value="2">Chart 2 — Doc 1 Evaluation</option>
+      <option value="3">Chart 3 — Doc 2 Evidence</option>
+      <option value="4">Chart 4 — Doc 2 Evaluation</option>
+    </select>
+  </div>
+</div>
+<textarea class="small" id="ew-question-draft" placeholder="Write your draft answer here first — talk it through with your group, then transcribe this onto your chart."></textarea>
+<div class="try-first-note">This is your think-and-pair draft — no AI check needed here. Write, discuss, then go write it on the chart paper.</div>
+
+<h3>Step 2: Gallery notes</h3>
+<p style="font-family:Arial, sans-serif; font-size:0.88rem; color:#555;">
+  After the charts are built, walk past all four and jot the strongest quote or claim you see on each — not your own.
+</p>
+<div class="big-three-row" style="flex-direction:column; gap:8px;">
+  <div class="big-three-field"><label for="ew-gallery-1">Chart 1 — Doc 1 Evidence</label><input type="text" id="ew-gallery-1" style="padding:6px 8px; font-family:inherit; font-size:13.5px; border:1px solid #ccc; border-radius:4px;"></div>
+  <div class="big-three-field"><label for="ew-gallery-2">Chart 2 — Doc 1 Evaluation</label><input type="text" id="ew-gallery-2" style="padding:6px 8px; font-family:inherit; font-size:13.5px; border:1px solid #ccc; border-radius:4px;"></div>
+  <div class="big-three-field"><label for="ew-gallery-3">Chart 3 — Doc 2 Evidence</label><input type="text" id="ew-gallery-3" style="padding:6px 8px; font-family:inherit; font-size:13.5px; border:1px solid #ccc; border-radius:4px;"></div>
+  <div class="big-three-field"><label for="ew-gallery-4">Chart 4 — Doc 2 Evaluation</label><input type="text" id="ew-gallery-4" style="padding:6px 8px; font-family:inherit; font-size:13.5px; border:1px solid #ccc; border-radius:4px;"></div>
+</div>
+
+<h3>Step 3: Your final reflection</h3>
+<p style="font-family:Arial, sans-serif; font-size:0.9rem; color:#555;">
+  Now that you've seen the evidence for both sides — which document's case do you find more convincing overall?
+  Use at least one direct quote.
+</p>
+
+<h4 style="font-family:Arial, sans-serif; font-size:0.95rem; margin:10px 0 4px 0;">Vocabulary — click a word for its definition. Use at least half of these in your writing below.</h4>
 <div class="vocab-checklist" id="vocab-checklist"></div>
 <div class="vocab-definition" id="vocab-definition"></div>
 <div class="vocab-status" id="vocab-status"></div>
 
-<textarea class="big" id="evidence-wall-prep" placeholder="Prepare notes for whichever chart question you get assigned — pasting is disabled for this assignment."></textarea>
+<textarea class="big" id="fishbowl-prep" placeholder="Type your final reflection here — pasting is disabled for this assignment."></textarea>
 <div class="paste-warning" id="paste-warning" style="display:none;">Pasting is disabled for this assignment — type your own response.</div>
-<div class="try-first-note">Write your own notes first — the check button unlocks once you've written a few sentences.</div>
-<button id="checkbtn-evidencewall" onclick="checkEvidenceWallPrep()">Check my reasoning so far (coaching, not a grade)</button>
-<div class="helper-panel" id="feedback-evidencewall" style="display:none;"></div>
+<div class="try-first-note">Write your own reflection first — the check button unlocks once you've written a few sentences.</div>
+<button id="checkbtn-fishbowl" onclick="checkFishbowlPrep()">Check my reasoning so far (coaching, not a grade)</button>
+<div class="helper-panel" id="feedback-fishbowl" style="display:none;"></div>
 
 <!-- ============ SUBMIT ============ -->
 <div style="margin-top:20px;">
   <button class="primary" onclick="submitWork()">Submit for feedback</button>
+
   <button onclick="downloadWork()">Download my work (PDF-style print)</button>
 </div>
 <p style="font-family:Arial, sans-serif; font-size:0.85rem; color:#555; max-width:600px;">
-  <strong>Before you build the Evidence Wall:</strong> Click <strong>Submit for feedback</strong> first, then click
+  <strong>Before you go write on the chart:</strong> Click <strong>Submit for feedback</strong> first, then click
   <strong>Download my work</strong> and save it as a PDF (choose "Save as PDF" as the printer). Bring your
-  printed or saved notes to the Evidence Wall — you'll want your quotes in front of you.
+  printed or saved notes with you to the Evidence Wall — you'll want them in front of you.
 </p>
 <div id="completion-area"></div>
 
@@ -472,63 +388,13 @@ const VOCAB_LIST = [
   { term: 'sharecropping', label: 'Sharecropping', definition: 'A farming system where a tenant farms land for a share of the crop, often trapping workers in debt.' }
 ];
 const VOCAB_REQUIRED = Math.ceil(VOCAB_LIST.length * 0.5); // 3 of 6
-const GUIDED_KEYS = ['cv1', 'cv2', 'cv3', 'jv1', 'jv2', 'jv3', 'evidencewall'];
+const GUIDED_KEYS = ['cv1', 'cv2', 'cv3', 'jv1', 'jv2', 'jv3', 'fishbowl'];
 const MAX_CHECK_ATTEMPTS = 3;
-const GOAL_KEYS = ['goal-cv-1', 'goal-cv-2', 'goal-cv-3', 'goal-cv-4', 'goal-jv-1', 'goal-jv-2', 'goal-jv-3', 'goal-jv-4'];
-
-// Document-specific glossaries — the actual hard/archaic words in each source, not general
-// Tier 2/3 vocabulary. Framed on the page as available to everyone (see HTML comments above).
-const DOC1_GLOSSARY = [
-  { term: 'deliberate', label: 'Deliberate', definition: 'To think carefully and discuss something before deciding.' },
-  { term: 'obstructions', label: 'Obstructions', definition: 'Things that get in the way or block something from happening.' },
-  { term: 'disabilities', label: 'Disabilities (legal sense)', definition: 'Here, legal restrictions or disadvantages placed on a group of people — not a physical disability.' },
-  { term: 'testimony', label: 'Testimony', definition: 'A formal statement given as evidence, especially in court.' },
-  { term: 'spoliation', label: 'Spoliation', definition: 'The act of taking or damaging someone\u2019s property, often through fraud or force.' },
-  { term: 'redress', label: 'Redress', definition: 'A fix or correction for a wrong that was done to someone.' }
-];
-const DOC2_GLOSSARY = [
-  { term: 'necessity', label: 'Necessity', definition: 'Something that is truly needed.' },
-  { term: 'stringent', label: 'Stringent', definition: 'Strict; allowing very little flexibility.' },
-  { term: 'patronage', label: 'Patronage', definition: 'The power to hand out jobs or favors, often used to build political loyalty.' },
-  { term: 'infringement', label: 'Infringement', definition: 'A violation of someone\u2019s rights.' },
-  { term: 'resistance to the laws', label: 'Resistance to the Laws', definition: 'Refusing to obey or follow the law.' }
-];
 
 let struggleLevels = { 'cv': 0, 'jv': 0 };
 let guidedAttempts = {};
 
-// ---------- Document glossaries (lookup only, framed as universal support) ----------
-function renderGlossaryChips(list, containerId, defBoxId) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-  container.innerHTML = '';
-  list.forEach(v => {
-    const chip = document.createElement('span');
-    chip.className = 'vocab-chip';
-    chip.textContent = v.label;
-    chip.setAttribute('role', 'button');
-    chip.setAttribute('tabindex', '0');
-    chip.onclick = () => showGlossaryDefinition(list, v.term, defBoxId);
-    chip.onkeypress = (e) => { if (e.key === 'Enter' || e.key === ' ') showGlossaryDefinition(list, v.term, defBoxId); };
-    container.appendChild(chip);
-  });
-}
-
-function showGlossaryDefinition(list, term, boxId) {
-  const box = document.getElementById(boxId);
-  const entry = list.find(v => v.term === term);
-  if (!entry || !box) return;
-  if (box.classList.contains('show') && box.dataset.term === term) {
-    box.classList.remove('show');
-    box.dataset.term = '';
-    return;
-  }
-  box.innerHTML = '<strong>' + entry.label + ':</strong> ' + entry.definition;
-  box.dataset.term = term;
-  box.classList.add('show');
-}
-
-// ---------- Vocabulary checklist (tracked, near Evidence Wall Prep) ----------
+// ---------- Vocabulary checklist (tracked, near Fishbowl Prep) ----------
 function renderVocabChecklist(usedTerms) {
   const container = document.getElementById('vocab-checklist');
   container.innerHTML = '';
@@ -578,51 +444,14 @@ function showDefinition(term, boxId) {
 }
 
 function getUsedVocab() {
-  const text = document.getElementById('evidence-wall-prep').value.toLowerCase();
+  const text = document.getElementById('fishbowl-prep').value.toLowerCase();
   return VOCAB_LIST.filter(v => text.includes(v.term)).map(v => v.term);
-}
-
-// ---------- Goals Reference Sheet checkboxes ----------
-function collectGoalsChecked() {
-  const map = {};
-  GOAL_KEYS.forEach(k => {
-    const el = document.getElementById(k);
-    map[k] = !!(el && el.checked);
-  });
-  return map;
-}
-
-function restoreGoalsChecked(map) {
-  if (!map) return;
-  GOAL_KEYS.forEach(k => {
-    const el = document.getElementById(k);
-    if (el && map[k]) {
-      el.checked = true;
-      const label = el.closest('.goal-item');
-      if (label) label.classList.add('checked');
-    }
-  });
-}
-
-function wireGoalCheckboxes() {
-  GOAL_KEYS.forEach(k => {
-    const el = document.getElementById(k);
-    if (!el) return;
-    el.addEventListener('change', () => {
-      const label = el.closest('.goal-item');
-      if (label) label.classList.toggle('checked', el.checked);
-      scheduleAutoSave();
-    });
-  });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   renderVocabChecklist([]);
   renderVocabQuickRef();
-  renderGlossaryChips(DOC1_GLOSSARY, 'glossary-cv', 'glossary-def-cv');
-  renderGlossaryChips(DOC2_GLOSSARY, 'glossary-jv', 'glossary-def-jv');
-  wireGoalCheckboxes();
-  document.getElementById('evidence-wall-prep').addEventListener('input', () => {
+  document.getElementById('fishbowl-prep').addEventListener('input', () => {
     renderVocabChecklist(getUsedVocab());
   });
 });
@@ -643,13 +472,13 @@ document.addEventListener('DOMContentLoaded', () => {
   wireTryFirst('answer-jv1', 'checkbtn-jv1', 15);
   wireTryFirst('answer-jv2', 'checkbtn-jv2', 15);
   wireTryFirst('answer-jv3', 'checkbtn-jv3', 15);
-  wireTryFirst('evidence-wall-prep', 'checkbtn-evidencewall', 40);
+  wireTryFirst('fishbowl-prep', 'checkbtn-fishbowl', 40);
   wireTryFirst('question-cv', 'ask-cv-btn', 8);
   wireTryFirst('question-jv', 'ask-jv-btn', 8);
 });
 
 // ---------- Paste blocking on all free-write boxes ----------
-['evidence-wall-prep', 'other-notes-cv', 'other-notes-jv',
+['fishbowl-prep', 'other-notes-cv', 'other-notes-jv',
  'answer-cv1', 'answer-cv2', 'answer-cv3', 'answer-jv1', 'answer-jv2', 'answer-jv3'].forEach(id => {
   document.addEventListener('DOMContentLoaded', () => {
     const el = document.getElementById(id);
@@ -719,10 +548,6 @@ function restoreHighlights(map) {
 
 // ---------- Big Three tag/lens selects ----------
 const TAG_KEYS = ['cv1', 'cv2', 'cv3', 'jv1', 'jv2', 'jv3'];
-const TAG_PASSAGE_LABELS = {
-  cv1: 'Document 1, Passage 1', cv2: 'Document 1, Passage 2', cv3: 'Document 1, Passage 3',
-  jv1: 'Document 2, Passage 1', jv2: 'Document 2, Passage 2', jv3: 'Document 2, Passage 3'
-};
 function collectTags() {
   const map = {};
   TAG_KEYS.forEach(k => {
@@ -731,25 +556,6 @@ function collectTags() {
     map[k] = { tag: tagEl ? tagEl.value : '', lens: lensEl ? lensEl.value : '' };
   });
   return map;
-}
-// Enforcement: completion requires every passage to be tagged Claimed/Denied AND given a lens —
-// the whole point of the Big Three redesign is the tagging itself, so it can't be skippable.
-function getMissingTags() {
-  const missing = [];
-  TAG_KEYS.forEach(k => {
-    const tagEl = document.getElementById('tag-' + k);
-    const lensEl = document.getElementById('lens-' + k);
-    const tagMissing = !tagEl || !tagEl.value;
-    const lensMissing = !lensEl || !lensEl.value;
-    if (tagMissing || lensMissing) {
-      let detail = TAG_PASSAGE_LABELS[k];
-      if (tagMissing && lensMissing) detail += ' (needs Claimed/Denied and Lens)';
-      else if (tagMissing) detail += ' (needs Claimed/Denied)';
-      else detail += ' (needs Lens)';
-      missing.push(detail);
-    }
-  });
-  return missing;
 }
 function restoreTags(map) {
   if (!map) return;
@@ -893,27 +699,27 @@ async function checkGuided(key, partLabel, passageElId, questionText) {
   panel.innerHTML = data.reply || data.error || 'No response.';
 }
 
-async function checkEvidenceWallPrep() {
-  const answer = document.getElementById('evidence-wall-prep').value.trim();
-  const panel = document.getElementById('feedback-evidencewall');
+async function checkFishbowlPrep() {
+  const answer = document.getElementById('fishbowl-prep').value.trim();
+  const panel = document.getElementById('feedback-fishbowl');
   if (!answer) { alert('Write something in the box first.'); return; }
 
-  const attemptsSoFar = guidedAttempts['evidencewall'] || 0;
+  const attemptsSoFar = guidedAttempts['fishbowl'] || 0;
   if (attemptsSoFar >= MAX_CHECK_ATTEMPTS) {
     panel.style.display = 'block';
-    panel.innerHTML = "You've checked this a few times — trust your evidence and get ready to add it to the Evidence Wall. Flag it for your teacher if you're still unsure.";
+    panel.innerHTML = "You've checked this a few times — trust your position and go write it on the chart. Flag it for your teacher if you're still unsure.";
     return;
   }
-  guidedAttempts['evidencewall'] = attemptsSoFar + 1;
+  guidedAttempts['fishbowl'] = attemptsSoFar + 1;
   panel.style.display = 'block';
   panel.innerHTML = '<span class="locked">Thinking...</span>';
 
   const data = await callBackend('guided_check', {
-    partLabel: 'Evidence Wall Prep (Charts 1-4 notes)',
-    passageText: "N/A — this is feedback on the student's own developing evidence notes, not a source excerpt.",
-    questionText: 'This response should prepare the student for any of four possible questions: (1) specific, directly quoted evidence from Document 1 showing something claimed or denied/blocked, (2) whether Document 1\u2019s case is convincing and why, (3) the same evidence check for Document 2, (4) whether Document 2\u2019s case is convincing and why. Does the response cover evidence AND a convincing/not-convincing judgment for at least one document, ideally both?',
+    partLabel: 'Evidence Wall Final Reflection',
+    passageText: "N/A — this is feedback on the student's own developing position, not a source excerpt.",
+    questionText: 'Does this response take a clear position on which document\'s case is more convincing overall (the Convention Address or Johnson\'s veto) AND back it with a specific, directly quoted piece of evidence from that document?',
     studentAnswer: answer,
-    attemptNumber: guidedAttempts['evidencewall']
+    attemptNumber: guidedAttempts['fishbowl']
   });
   if (!data) { panel.style.display = 'none'; return; }
   panel.innerHTML = data.reply || data.error || 'No response.';
@@ -922,7 +728,7 @@ async function checkEvidenceWallPrep() {
 function getGuidedAnswers() {
   const answers = {};
   GUIDED_KEYS.forEach(k => {
-    if (k === 'evidencewall') { answers[k] = document.getElementById('evidence-wall-prep').value; return; }
+    if (k === 'fishbowl') { answers[k] = document.getElementById('fishbowl-prep').value; return; }
     const el = document.getElementById('answer-' + k);
     if (el) answers[k] = el.value;
   });
@@ -931,7 +737,7 @@ function getGuidedAnswers() {
 
 function countGuidedAnswers() {
   return GUIDED_KEYS.filter(k => {
-    if (k === 'evidencewall') { return document.getElementById('evidence-wall-prep').value.trim().length > 5; }
+    if (k === 'fishbowl') { return document.getElementById('fishbowl-prep').value.trim().length > 5; }
     const el = document.getElementById('answer-' + k);
     return el && el.value.trim().length > 5;
   }).length;
@@ -939,12 +745,17 @@ function countGuidedAnswers() {
 
 let saveTimer = null;
 function scheduleAutoSave() { clearTimeout(saveTimer); saveTimer = setTimeout(saveState, 4000); }
-['other-notes-cv', 'other-notes-jv', 'evidence-wall-prep',
- 'answer-cv1', 'answer-cv2', 'answer-cv3', 'answer-jv1', 'answer-jv2', 'answer-jv3'].forEach(id => {
+['other-notes-cv', 'other-notes-jv', 'fishbowl-prep',
+ 'answer-cv1', 'answer-cv2', 'answer-cv3', 'answer-jv1', 'answer-jv2', 'answer-jv3',
+ 'ew-question-draft', 'ew-gallery-1', 'ew-gallery-2', 'ew-gallery-3', 'ew-gallery-4'].forEach(id => {
   document.addEventListener('DOMContentLoaded', () => {
     const el = document.getElementById(id);
     if (el) el.addEventListener('input', scheduleAutoSave);
   });
+});
+document.addEventListener('DOMContentLoaded', () => {
+  const sel = document.getElementById('ew-question-select');
+  if (sel) sel.addEventListener('change', scheduleAutoSave);
 });
 
 async function saveState() {
@@ -957,17 +768,27 @@ function collectState() {
   return {
     openingWrite: '',
     closingWrite: '',
-    mainResponse: document.getElementById('evidence-wall-prep').value,
+    mainResponse: document.getElementById('fishbowl-prep').value,
     highlights: collectHighlights(),
     highlightCount: countHighlights(),
     guidedAnswers: getGuidedAnswers(),
     guidedAnswersCount: countGuidedAnswers(),
     guidedAnswersTotal: GUIDED_KEYS.length,
     tags: collectTags(),
-    goalsChecked: collectGoalsChecked(),
     otherNotes: {
       cv: document.getElementById('other-notes-cv').value,
-      jv: document.getElementById('other-notes-jv').value
+      jv: document.getElementById('other-notes-jv').value,
+      tags: collectTags(), // stored again here too -- otherNotes is the field that reliably round-trips through save/load
+      evidenceWall: {
+        questionNumber: document.getElementById('ew-question-select').value,
+        questionDraft: document.getElementById('ew-question-draft').value,
+        gallery: {
+          c1: document.getElementById('ew-gallery-1').value,
+          c2: document.getElementById('ew-gallery-2').value,
+          c3: document.getElementById('ew-gallery-3').value,
+          c4: document.getElementById('ew-gallery-4').value
+        }
+      }
     },
     vocabUsed: getUsedVocab(),
     vocabList: VOCAB_LIST.map(v => v.term)
@@ -980,14 +801,13 @@ async function loadState() {
   const data = await callBackend('load_state', {});
   if (!data || !data.found) { status.textContent = 'No saved work found yet — start typing below.'; return; }
 
-  document.getElementById('evidence-wall-prep').value = data.mainResponse || '';
+  document.getElementById('fishbowl-prep').value = data.mainResponse || '';
   restoreHighlights(data.highlights);
-  restoreTags(data.tags);
-  restoreGoalsChecked(data.goalsChecked);
+  restoreTags(data.tags); // top-level tags, if present (older saves)
 
   const ga = data.guidedAnswers || {};
   GUIDED_KEYS.forEach(k => {
-    if (k === 'evidencewall') return;
+    if (k === 'fishbowl') return;
     const el = document.getElementById('answer-' + k);
     if (el && ga[k]) el.value = ga[k];
   });
@@ -995,23 +815,22 @@ async function loadState() {
   const notes = data.otherNotes || {};
   document.getElementById('other-notes-cv').value = notes.cv || '';
   document.getElementById('other-notes-jv').value = notes.jv || '';
+  if (notes.tags) restoreTags(notes.tags); // reliable source -- overrides top-level if both present
+
+  const ew = notes.evidenceWall || {};
+  document.getElementById('ew-question-select').value = ew.questionNumber || '';
+  document.getElementById('ew-question-draft').value = ew.questionDraft || '';
+  const gallery = ew.gallery || {};
+  document.getElementById('ew-gallery-1').value = gallery.c1 || '';
+  document.getElementById('ew-gallery-2').value = gallery.c2 || '';
+  document.getElementById('ew-gallery-3').value = gallery.c3 || '';
+  document.getElementById('ew-gallery-4').value = gallery.c4 || '';
 
   renderVocabChecklist(getUsedVocab());
   status.textContent = 'Work loaded.';
 }
 
 async function submitWork() {
-  const area = document.getElementById('completion-area');
-
-  // Enforcement: don't even call the backend if tagging isn't done — the tags are the point.
-  const missingTags = getMissingTags();
-  if (missingTags.length > 0) {
-    area.innerHTML = '<div class="completion-box incomplete"><strong>Not quite complete yet</strong>' +
-      '<ul><li>Finish tagging Claimed/Denied and Lens for: ' + missingTags.join('; ') + '.</li></ul></div>';
-    area.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    return;
-  }
-
   const state = collectState();
   const submitBtn = document.querySelector('button.primary');
   submitBtn.disabled = true;
@@ -1022,6 +841,7 @@ async function submitWork() {
   submitBtn.disabled = false;
   submitBtn.textContent = 'Submit for feedback';
 
+  const area = document.getElementById('completion-area');
   if (!data) { area.innerHTML = ''; return; }
   if (data.error) { area.innerHTML = '<div class="completion-box incomplete">' + data.error + '</div>'; return; }
 
@@ -1030,7 +850,7 @@ async function submitWork() {
   let checklistHtml = '';
   if (!data.complete && data.checklist) {
     checklistHtml = '<ul>';
-    if (!data.checklist.hasMainResponse) checklistHtml += '<li>Your Evidence Wall notes need more detail — make sure you have evidence and a convincing/not-convincing judgment for each document.</li>';
+    if (!data.checklist.hasMainResponse) checklistHtml += '<li>Your final reflection needs more detail.</li>';
     if (!data.checklist.hasHighlights) checklistHtml += '<li>Highlight at least one phrase in each document.</li>';
     if (!data.checklist.vocabMet) checklistHtml += '<li>Use at least ' + data.checklist.vocabRequired + ' vocabulary words (currently ' + data.checklist.vocabCount + ').</li>';
     if (!data.checklist.hasGuidedAnswers) checklistHtml += '<li>Answer at least ' + (data.checklist.guidedTotal - 1) + ' of the ' + data.checklist.guidedTotal + ' guided items.</li>';
@@ -1095,9 +915,17 @@ function downloadWork() {
     <div class="p-label">Other notes on this document</div>
     <div class="p-block">${esc(val('other-notes-jv')) || '(none)'}</div>
 
-    <h2>Evidence Wall Prep: Charts 1-4 Notes</h2>
+    <h2>Evidence Wall</h2>
+    <div class="p-label">My assigned question: ${esc(sel('ew-question-select')) || '(not chosen)'}</div>
+    <div class="p-block">${esc(val('ew-question-draft')) || '(not yet answered)'}</div>
+    <div class="p-label">Gallery notes</div>
+    <div class="p-block">Chart 1: ${esc(val('ew-gallery-1')) || '(none)'}
+Chart 2: ${esc(val('ew-gallery-2')) || '(none)'}
+Chart 3: ${esc(val('ew-gallery-3')) || '(none)'}
+Chart 4: ${esc(val('ew-gallery-4')) || '(none)'}</div>
     <div class="p-label">Vocabulary used: ${(getUsedVocab().map(t => VOCAB_LIST.find(v => v.term === t).label).join(', ')) || 'none yet'}</div>
-    <div class="p-block">${esc(val('evidence-wall-prep')) || '(not yet written)'}</div>
+    <div class="p-label">Final reflection</div>
+    <div class="p-block">${esc(val('fishbowl-prep')) || '(not yet written)'}</div>
 
     <h2>Feedback received</h2>
     <div class="p-block">${document.getElementById('completion-area').innerHTML || '(not yet submitted for feedback)'}</div>
