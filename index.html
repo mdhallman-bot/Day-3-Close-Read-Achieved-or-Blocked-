@@ -81,6 +81,20 @@
   .mock-card .range { font-weight: bold; color: #4a5fa8; margin-bottom: 6px; }
   .mock-card .improve { margin-top: 8px; padding-top: 8px; border-top: 1px dashed #ccc; font-size: 0.85rem; }
 
+  .goals-preview { margin: 14px 0 24px 0; }
+  .goals-preview-intro { font-family: Arial, sans-serif; font-size: 0.9rem; color: #555; margin-bottom: 10px; }
+  .goals-columns { display: flex; gap: 16px; flex-wrap: wrap; }
+  .goals-col { flex: 1; min-width: 280px; border-radius: 6px; padding: 14px 16px; font-family: Arial, sans-serif; }
+  .goals-col.doc1 { background: #eef1fb; border-left: 4px solid var(--navy); }
+  .goals-col.doc2 { background: var(--panel); border-left: 4px solid var(--gold); }
+  .goals-col h4 { margin: 0 0 8px 0; font-size: 0.95rem; }
+  .goals-col.doc1 h4 { color: var(--navy); }
+  .goals-col.doc2 h4 { color: var(--accent); }
+  .goal-item { display: flex; align-items: flex-start; gap: 8px; font-size: 0.88rem; margin-bottom: 8px; cursor: pointer; }
+  .goal-item input[type="checkbox"] { margin-top: 3px; flex-shrink: 0; }
+  .goal-item span { line-height: 1.4; }
+  .goal-item.checked span { color: #4a8f52; text-decoration: line-through; text-decoration-color: #4a8f52; }
+
   @media print {
     button, .id-bar { display: none !important; }
     body.printing > *:not(#print-summary) { display: none !important; }
@@ -134,6 +148,57 @@
   <span><span class="swatch" style="background:var(--red-strong);"></span>Red highlight = evidence of something BLOCKED</span>
 </div>
 
+<!-- ============ GOALS REFERENCE SHEET ============ -->
+<h2>Before you read: what was each side actually asking for?</h2>
+<div class="goals-preview">
+  <div class="goals-preview-intro">
+    You and a partner should already have sorted these into two lists during today's warm-up. Check a box
+    below once you find a line in the documents that connects to that goal — achieved, blocked, or somewhere
+    in between. Keep this list open while you annotate; the guided questions will ask you to name which goal
+    a passage connects to.
+  </div>
+  <div class="goals-columns">
+    <div class="goals-col doc1">
+      <h4>Document 1 — Formerly Enslaved People (Colored Convention)</h4>
+      <label class="goal-item" data-goal="goal-cv-1">
+        <input type="checkbox" id="goal-cv-1">
+        <span>Full citizenship — not to be treated as "strangers" in the state where they were born and raised</span>
+      </label>
+      <label class="goal-item" data-goal="goal-cv-2">
+        <input type="checkbox" id="goal-cv-2">
+        <span>"Even-handed justice" — equal treatment under the law, not special favors</span>
+      </label>
+      <label class="goal-item" data-goal="goal-cv-3">
+        <input type="checkbox" id="goal-cv-3">
+        <span>Removal of the "obstructions and disabilities" recent laws have added on top of them since the war</span>
+      </label>
+      <label class="goal-item" data-goal="goal-cv-4">
+        <input type="checkbox" id="goal-cv-4">
+        <span>The right to testify in court, so violence and theft against them can actually be punished</span>
+      </label>
+    </div>
+    <div class="goals-col doc2">
+      <h4>Document 2 — Johnson &amp; Southern Democrats (Veto Message)</h4>
+      <label class="goal-item" data-goal="goal-jv-1">
+        <input type="checkbox" id="goal-jv-1">
+        <span>No need to act — the current Freedmen's Bureau law hasn't expired yet ("no immediate necessity")</span>
+      </label>
+      <label class="goal-item" data-goal="goal-jv-2">
+        <input type="checkbox" id="goal-jv-2">
+        <span>Keep government small — a federal agent in every county costs too much and keeps growing</span>
+      </label>
+      <label class="goal-item" data-goal="goal-jv-3">
+        <input type="checkbox" id="goal-jv-3">
+        <span>Trust the courts — once state and federal courts are "restored," they will already protect everyone's rights</span>
+      </label>
+      <label class="goal-item" data-goal="goal-jv-4">
+        <input type="checkbox" id="goal-jv-4">
+        <span>Return power to the states — decisions about freedpeople's lives belong at the state/local level, not Washington</span>
+      </label>
+    </div>
+  </div>
+</div>
+
 <!-- ============ QUICK VOCABULARY REFERENCE (top of page) ============ -->
 <div class="vocab-quickref">
   <div class="vocab-quickref-label">Quick vocabulary reference — click a word any time you need it</div>
@@ -152,7 +217,7 @@
 <div class="clause-label">Passage 1 — Who is speaking, and why</div>
 <div class="source-text" id="chunk-cv1" contenteditable="true" spellcheck="false">We have assembled as delegates representing the colored people of the State of South Carolina, in the capacity of State Convention, to confer together and to deliberate upon our intellectual, moral, industrial, civil, and political condition as affected by the great changes which have taken place in this State.</div>
 <div class="guided-block">
-  <div class="guided-question"><strong>Guiding question:</strong> What change gives these delegates the standing to speak this way, in public, to the whole state? What does the act of holding this convention itself tell you — achieved or still in progress?</div>
+  <div class="guided-question"><strong>Guiding question:</strong> What change gives these delegates the standing to speak this way, in public, to the whole state? What does the act of holding this convention itself tell you — achieved or still in progress? Which goal from today's list does this connect to?</div>
   <div class="big-three-row">
     <div class="big-three-field">
       <label for="tag-cv1">Achieved or Blocked?</label>
@@ -172,7 +237,7 @@
 <div class="clause-label">Passage 2 — What they're asking for</div>
 <div class="source-text" id="chunk-cv2" contenteditable="true" spellcheck="false">We ask for no special privileges, or peculiar favors. We ask only for even-handed justice — for the removal of such positive obstructions and disabilities as past and recent legislation has thrown in our way and heaped upon us.</div>
 <div class="guided-block">
-  <div class="guided-question"><strong>Guiding question:</strong> The delegates are careful to say they want "even-handed justice," not "special privileges." Why might that distinction have mattered to their audience? Is the goal here achieved or blocked, and what lens fits?</div>
+  <div class="guided-question"><strong>Guiding question:</strong> The delegates are careful to say they want "even-handed justice," not "special privileges." Why might that distinction have mattered to their audience? Is the goal here achieved or blocked, and what lens fits? Which goal from today's list does this connect to?</div>
   <div class="big-three-row">
     <div class="big-three-field">
       <label for="tag-cv2">Achieved or Blocked?</label>
@@ -192,7 +257,7 @@
 <div class="clause-label">Passage 3 — What's still blocked</div>
 <div class="source-text" id="chunk-cv3" contenteditable="true" spellcheck="false">We... have, with few exceptions, been virtually excluded from the rights of citizenship, which you cheerfully accord to strangers, notwithstanding we have been born and reared in your midst. We are denied the right of giving our testimony in the courts of the State, in consequence of which our persons and property are subject to every species of violence and insult, and fraud and spoliation, without redress.</div>
 <div class="guided-block">
-  <div class="guided-question"><strong>Guiding question:</strong> Name one specific right this passage says is denied. What real, everyday consequence does that denial have, according to the text? Mark it and tag the lens.</div>
+  <div class="guided-question"><strong>Guiding question:</strong> Name one specific right this passage says is denied. What real, everyday consequence does that denial have, according to the text? Mark it and tag the lens. Which goal from today's list does this connect to?</div>
   <div class="big-three-row">
     <div class="big-three-field">
       <label for="tag-cv3">Achieved or Blocked?</label>
@@ -230,7 +295,7 @@
 <div class="clause-label">Passage 1 — No necessity claim</div>
 <div class="source-text" id="chunk-jv1" contenteditable="true" spellcheck="false">There is no immediate necessity for the proposed measure. The act to establish a bureau for the relief of freedmen and refugees, which was approved in the month of March last, has not yet expired. It was thought stringent and extensive enough for the purpose in view in time of war.</div>
 <div class="guided-block">
-  <div class="guided-question"><strong>Guiding question:</strong> Johnson says a stronger Bureau bill isn't necessary. Whose interests does this argument serve? From the perspective of formerly enslaved people, is this passage evidence of something achieved or something blocked? Tag the lens.</div>
+  <div class="guided-question"><strong>Guiding question:</strong> Johnson says a stronger Bureau bill isn't necessary. Whose interests does this argument serve? From the perspective of formerly enslaved people, is this passage evidence of something achieved or something blocked? Tag the lens. Which goal from today's list does this connect to?</div>
   <div class="big-three-row">
     <div class="big-three-field">
       <label for="tag-jv1">Achieved or Blocked?</label>
@@ -250,7 +315,7 @@
 <div class="clause-label">Passage 2 — Cost and scale objection</div>
 <div class="source-text" id="chunk-jv2" contenteditable="true" spellcheck="false">The appointment of an agent for every county and parish will create an immense patronage; and the expense of the numerous officers and their clerks, to be appointed by the President, will be great in the beginning, with a tendency steadily to increase.</div>
 <div class="guided-block">
-  <div class="guided-question"><strong>Guiding question:</strong> What specific goal does this objection block, and for whom? Would a formerly enslaved person reading this in 1866 see it as a fair, neutral concern — or something else? Explain, and tag it.</div>
+  <div class="guided-question"><strong>Guiding question:</strong> What specific goal does this objection block, and for whom? Would a formerly enslaved person reading this in 1866 see it as a fair, neutral concern — or something else? Explain, and tag it. Which goal from today's list does this connect to?</div>
   <div class="big-three-row">
     <div class="big-three-field">
       <label for="tag-jv2">Achieved or Blocked?</label>
@@ -270,7 +335,7 @@
 <div class="clause-label">Passage 3 — Trust in the state courts</div>
 <div class="source-text" id="chunk-jv3" contenteditable="true" spellcheck="false">With the Federal courts restored and those of the several States in the full exercise of their functions, the rights and interests of all classes of people will, with the aid of the military in cases of resistance to the laws, be essentially protected against unconstitutional infringement or violation.</div>
 <div class="guided-block">
-  <div class="guided-question"><strong>Guiding question:</strong> Johnson claims the state courts, once "restored," will protect everyone's rights. Compare this directly to Document 1, Passage 3 — what did the Convention delegates say about those same state courts? Mark this passage and tag the lens.</div>
+  <div class="guided-question"><strong>Guiding question:</strong> Johnson claims the state courts, once "restored," will protect everyone's rights. Compare this directly to Document 1, Passage 3 — what did the Convention delegates say about those same state courts? Mark this passage and tag the lens. Which goal from today's list does this connect to?</div>
   <div class="big-three-row">
     <div class="big-three-field">
       <label for="tag-jv3">Achieved or Blocked?</label>
@@ -351,6 +416,7 @@ const VOCAB_LIST = [
 const VOCAB_REQUIRED = Math.ceil(VOCAB_LIST.length * 0.5); // 3 of 6
 const GUIDED_KEYS = ['cv1', 'cv2', 'cv3', 'jv1', 'jv2', 'jv3', 'fishbowl'];
 const MAX_CHECK_ATTEMPTS = 3;
+const GOAL_KEYS = ['goal-cv-1', 'goal-cv-2', 'goal-cv-3', 'goal-cv-4', 'goal-jv-1', 'goal-jv-2', 'goal-jv-3', 'goal-jv-4'];
 
 let struggleLevels = { 'cv': 0, 'jv': 0 };
 let guidedAttempts = {};
@@ -409,9 +475,44 @@ function getUsedVocab() {
   return VOCAB_LIST.filter(v => text.includes(v.term)).map(v => v.term);
 }
 
+// ---------- Goals Reference Sheet checkboxes ----------
+function collectGoalsChecked() {
+  const map = {};
+  GOAL_KEYS.forEach(k => {
+    const el = document.getElementById(k);
+    map[k] = !!(el && el.checked);
+  });
+  return map;
+}
+
+function restoreGoalsChecked(map) {
+  if (!map) return;
+  GOAL_KEYS.forEach(k => {
+    const el = document.getElementById(k);
+    if (el && map[k]) {
+      el.checked = true;
+      const label = el.closest('.goal-item');
+      if (label) label.classList.add('checked');
+    }
+  });
+}
+
+function wireGoalCheckboxes() {
+  GOAL_KEYS.forEach(k => {
+    const el = document.getElementById(k);
+    if (!el) return;
+    el.addEventListener('change', () => {
+      const label = el.closest('.goal-item');
+      if (label) label.classList.toggle('checked', el.checked);
+      scheduleAutoSave();
+    });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   renderVocabChecklist([]);
   renderVocabQuickRef();
+  wireGoalCheckboxes();
   document.getElementById('fishbowl-prep').addEventListener('input', () => {
     renderVocabChecklist(getUsedVocab());
   });
@@ -731,6 +832,7 @@ function collectState() {
     guidedAnswersCount: countGuidedAnswers(),
     guidedAnswersTotal: GUIDED_KEYS.length,
     tags: collectTags(),
+    goalsChecked: collectGoalsChecked(),
     otherNotes: {
       cv: document.getElementById('other-notes-cv').value,
       jv: document.getElementById('other-notes-jv').value
@@ -749,6 +851,7 @@ async function loadState() {
   document.getElementById('fishbowl-prep').value = data.mainResponse || '';
   restoreHighlights(data.highlights);
   restoreTags(data.tags);
+  restoreGoalsChecked(data.goalsChecked);
 
   const ga = data.guidedAnswers || {};
   GUIDED_KEYS.forEach(k => {
